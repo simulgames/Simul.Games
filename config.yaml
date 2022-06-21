@@ -1,0 +1,8 @@
+# this is an example config, designed for local development. It is included in the .gitignore; Do not commit changes!
+
+server:
+  address: localhost
+  ports:
+    ui: 3000
+    app: 8080
+  secure: false

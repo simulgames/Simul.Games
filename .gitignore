@@ -1,0 +1,8 @@
+.idea/
+ui/node_modules
+ui/build
+ui/.env
+ui/.env.local
+app/simul-app
+build/
+config.yaml

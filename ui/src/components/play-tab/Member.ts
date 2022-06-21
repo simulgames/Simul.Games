@@ -1,0 +1,1 @@
+export type Member = {color:string,name:string}

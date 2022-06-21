@@ -1,0 +1,49 @@
+{
+  "name": "simul-client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.5.1",
+    "@mui/material": "^5.5.1",
+    "@types/jest": "^27.4.1",
+    "@types/react": "^17.0.40",
+    "@types/react-dom": "^17.0.13",
+    "@uiw/react-color-wheel": "^1.0.10",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-error-boundary": "^3.1.4",
+    "react-router-dom": "^6.2.2",
+    "react-scripts": "^5.0.1",
+    "react-spring": "^9.4.5",
+    "react-timer-hook": "^3.0.5",
+    "react-use-websocket": "^3.0.0",
+    "serve": "^13.0.2",
+    "styled-components": "^5.3.5",
+    "typescript": "^4.6.2",
+    "typescript-cookie": "^1.0.3",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "./make_dotenv.sh && npm i && react-scripts start",
+    "build": "./make_dotenv.sh && npm i && react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@types/styled-components": "^5.1.25",
+    "sass": "^1.51.0"
+  }
+}
