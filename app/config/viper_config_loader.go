@@ -17,6 +17,10 @@ func getOrigin() string {
 	return origin
 }
 
+func (v viperConfigLoader) loadConfig() (Config, error) {
+	return v.readConfig()
+}
+
 func (v viperConfigLoader) readConfig() (Config, error) {
 	viper.AddConfigPath("../")
 	err := viper.ReadInConfig()

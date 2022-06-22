@@ -2,6 +2,7 @@ package config
 
 import (
 	"log"
+	"os"
 )
 
 type Config struct {
@@ -32,13 +33,28 @@ func (c Config) GetPort() string {
 }
 
 type configLoader interface {
-	readConfig() (Config, error)
+	loadConfig() (Config, error)
 }
 
 var loader configLoader = viperConfigLoader{}
 
+func tryEnvironmentVariables() (Config, bool) {
+	origin, foundOrigin := os.LookupEnv("SIMULGAMES_ORIGIN")
+	secureString, foundSecure := os.LookupEnv("SIMULGAMES_SECURE")
+	port, foundPort := os.LookupEnv("SIMULGAMES_PORT")
+	found := foundOrigin && foundSecure && foundPort
+	return Config{
+		origin: origin,
+		port:   port,
+		secure: secureString == "true",
+	}, found
+}
+
 func New() Config {
-	config, err := loader.readConfig()
+	if config, found := tryEnvironmentVariables(); found {
+		return config
+	}
+	config, err := loader.loadConfig()
 	if err != nil {
 		log.Panicln(err.Error())
 	}
