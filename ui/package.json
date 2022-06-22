@@ -18,7 +18,7 @@
     "react-scripts": "^5.0.1",
     "react-spring": "^9.4.5",
     "react-timer-hook": "^3.0.5",
-    "react-use-websocket": "^3.0.0",
+    "react-use-websocket": "^4.2.0",
     "serve": "^13.0.2",
     "styled-components": "^5.3.5",
     "typescript": "^4.6.2",
