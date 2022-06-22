@@ -1,10 +1,17 @@
 version: 2
 updates:
+  # Maintain dependencies for UI
   - package-ecosystem: "npm"
     directory: "/ui"
     schedule:
       interval: "daily"
+  # Maintain dependencies for App
   - package-ecosystem: "gomod" 
     directory: "/app"
+    schedule:
+      interval: "daily"
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
     schedule:
       interval: "daily"
