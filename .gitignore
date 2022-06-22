@@ -1,8 +1,14 @@
+#global
 .idea/
+config.yaml
+build/
+
+# ui
 ui/node_modules
 ui/build
 ui/.env
 ui/.env.local
+
+# app
 app/simul-app
-build/
-config.yaml
+app/coverage.out
