@@ -1,7 +1,7 @@
 name: Build and Test App
 
 on:
-  pull_request:
+  pull_request_target:
     branches: [ "main" ]
 
 jobs:
@@ -16,16 +16,15 @@ jobs:
         with:
           go-version: 1.18
 
-      - run: cd app
-
       - name: Build
-        run: go build -v ./...
+        run: cd app && go build -v ./...
 
       - name: Test
         id: test
         run: |
-          go test  -v ./... -coverpkg=./... -timeout 100ms -race
-          OUTPUT=$(go tool cover -func=coverage | tail -1)
+          cd app
+          go test -coverprofile=coverage.out ./... -coverpkg=./... -timeout 100ms -race
+          OUTPUT=$(go tool cover -func=coverage.out | tail -1)
           echo "::set-output name=result::$OUTPUT"
 
       - uses: marocchino/sticky-pull-request-comment@v2
