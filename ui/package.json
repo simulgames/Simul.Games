@@ -8,7 +8,7 @@
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.1",
     "@types/jest": "^27.4.1",
-    "@types/react": "^17.0.40",
+    "@types/react": "^18.0.14",
     "@types/react-dom": "^17.0.13",
     "@uiw/react-color-wheel": "^1.0.10",
     "react": "^18.1.0",
