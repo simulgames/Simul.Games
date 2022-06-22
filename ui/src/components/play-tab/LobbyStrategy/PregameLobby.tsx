@@ -10,12 +10,12 @@ import KeyRoundedIcon from '@mui/icons-material/KeyRounded';
 import KeyOffRoundedIcon from '@mui/icons-material/KeyOffRounded';
 import LocalPoliceRoundedIcon from '@mui/icons-material/LocalPoliceRounded';
 import {Member} from "../Member";
-import {SendJsonMessage} from "react-use-websocket/src/lib/types";
 import {useCallback, useState} from "react";
 import {styled} from "@mui/material/styles";
+import {SendMessage} from "../../../props/WebSockets";
 
 type Props = {
-    send:SendJsonMessage,
+    send:SendMessage,
     members : {[id:string]:Member}
     lobbyName : string
     gameSelected : string

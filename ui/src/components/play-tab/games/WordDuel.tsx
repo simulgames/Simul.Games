@@ -500,7 +500,7 @@ export const WordDuel = (props:Props) => {
     },[updateGuessFromKey])
 
 
-    const updateKeyStyleFromGuesses = useCallback((guesses,results) => {
+    const updateKeyStyleFromGuesses = useCallback((guesses: string[],results: number[][]) => {
         let keyStylesUpdate : keyStyle[] = []
         for(let turn in guesses){
             let word = guesses[turn]

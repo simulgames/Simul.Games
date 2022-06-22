@@ -3,11 +3,10 @@ import {Play} from "./play-tab/Play";
 import {Host} from "./Host";
 import {Error404} from "./404";
 import React, {useEffect} from "react";
-import {SendJsonMessage} from "react-use-websocket/src/lib/types";
-import {ConnectionState} from "../props/WebSockets";
+import {ConnectionState, SendMessage} from "../props/WebSockets";
 
 
-type Props = {send:SendJsonMessage,
+type Props = {send:SendMessage,
     state:ConnectionState
     inLobby:boolean
 };
