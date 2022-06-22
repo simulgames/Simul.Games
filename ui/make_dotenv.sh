@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if ("$IGNORE_CONFIG == 1"); then
+if [ "$IGNORE_CONFIG" -eq "1" ]; then
 # for if we have already set up environment variables from another source, e.g. cloudflare pages
   exit 0
 fi
