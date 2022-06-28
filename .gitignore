@@ -8,7 +8,10 @@ ui/node_modules
 ui/build
 ui/coverage
 ui/.env
-ui/.env.local
+ui/.env.*
+ui/.svelte-kit
+ui/.DS_Store
+ui/package
 
 # app
 app/simul-app
