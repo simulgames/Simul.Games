@@ -12,6 +12,7 @@ ui/.env.*
 ui/.svelte-kit
 ui/.DS_Store
 ui/package
+ui/coverage
 
 # app
 app/simul-app
