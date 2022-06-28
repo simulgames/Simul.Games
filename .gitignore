@@ -6,6 +6,7 @@ build/
 # ui
 ui/node_modules
 ui/build
+ui/coverage
 ui/.env
 ui/.env.local
 

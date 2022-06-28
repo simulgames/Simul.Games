@@ -16,6 +16,7 @@
     "react-error-boundary": "^3.1.4",
     "react-router-dom": "^6.2.2",
     "react-spring": "^9.4.5",
+    "react-test-renderer": "^18.2.0",
     "react-timer-hook": "^3.0.5",
     "react-use-websocket": "^4.2.0",
     "serve": "^13.0.2",
@@ -27,7 +28,7 @@
   "scripts": {
     "start": "./make_dotenv.sh && npm i && react-scripts start",
     "build": "./make_dotenv.sh && npm i && react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom --watchAll=false --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -42,8 +43,15 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "react-scripts": "^5.0.1",
     "@types/styled-components": "^5.1.25",
+    "react-scripts": "^5.0.1",
     "sass": "^1.53.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/index.tsx",
+      "!src/reportWebVitals.ts"
+    ]
   }
 }
