@@ -10,6 +10,7 @@
     "^.+\\.ts$": "ts-jest"
   },
   "moduleNameMapper": {
+    "\\.(css|jpg|png)$": "<rootDir>/empty-module.js",
     "^\\$lib(.*)$": "<rootDir>/src/lib$1",
     "^\\$app(.*)$": [
       "<rootDir>/.svelte-kit/dev/runtime/app$1",

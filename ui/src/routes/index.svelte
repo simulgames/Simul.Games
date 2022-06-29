@@ -1,2 +1,19 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+    import "../app.css";
+    import Header from "../components/Header.svelte"
+    import Footer from "../components/Footer.svelte"
+    import JoinLobby from "../components/JoinLobby.svelte"
+    import {onMount} from "svelte";
+    import {BuildWebSocket,type SendMessage} from "../scripts/WebSocket"
+    let sendMessage : SendMessage = null
+    onMount(()=>{
+        sendMessage = BuildWebSocket()
+    })
+</script>
+
+<Header/>
+
+<div class="min-w-fit max-w-[95%] w-[30rem] mx-auto">
+    <JoinLobby/>
+</div>
+<Footer/>
