@@ -1,5 +1,5 @@
 {
-	"name": "ui",
+	"name": "simul.games",
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "svelte-kit dev",
@@ -15,30 +15,35 @@
 		"test:watch": "npm run test -- --watch"
 	},
 	"devDependencies": {
+		"@babel/core": "^7.14.0",
+		"@babel/preset-env": "^7.14.0",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
+		"@testing-library/jest-dom": "^5.14.0",
+		"@testing-library/svelte": "^3.0.0",
+		"@types/jest": "^27.0.0",
+		"@types/testing-library__jest-dom": "^5.14.0",
 		"@typescript-eslint/eslint-plugin": "^5.27.0",
 		"@typescript-eslint/parser": "^5.27.0",
+		"autoprefixer": "^10.4.7",
+		"babel-jest": "^27.0.0",
 		"eslint": "^8.16.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^4.0.0",
+		"jest": "^27.0.0",
+		"postcss": "^8.4.14",
 		"prettier": "^2.6.2",
 		"prettier-plugin-svelte": "^2.7.0",
 		"svelte": "^3.44.0",
 		"svelte-check": "^2.7.1",
-		"svelte-preprocess": "^4.10.6",
+		"svelte-jester": "^2.0.1",
+		"svelte-preprocess": "^4.10.7",
+		"tailwindcss": "^3.1.4",
+		"ts-jest": "^27.0.0",
 		"tslib": "^2.3.1",
 		"typescript": "^4.7.2",
-		"@babel/core": "^7.14.0",
-		"@babel/preset-env": "^7.14.0",
-		"jest": "^27.0.0",
-		"babel-jest": "^27.0.0",
-		"svelte-jester": "^2.0.1",
-		"@testing-library/svelte": "^3.0.0",
-		"@testing-library/jest-dom": "^5.14.0",
-		"ts-jest": "^27.0.0",
-		"@types/jest": "^27.0.0",
-		"@types/testing-library__jest-dom": "^5.14.0"
+		"typescript-cookie": "^1.0.3",
+		"websocket-ts": "^1.1.1"
 	},
 	"type": "module"
 }
