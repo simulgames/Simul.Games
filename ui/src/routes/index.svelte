@@ -14,6 +14,6 @@
 <Header/>
 
 <div class="min-w-fit max-w-[95%] w-[30rem] mx-auto">
-    <JoinLobby/>
+    <JoinLobby sendMessage={sendMessage}/>
 </div>
 <Footer/>
