@@ -2,7 +2,7 @@
 	"name": "simul.games",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "svelte-kit dev",
+		"dev": "./make_dotenv.sh && svelte-kit dev -o -p $(dotenv -p PORT)",
 		"build": "svelte-kit build",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
@@ -43,7 +43,8 @@
 		"tslib": "^2.3.1",
 		"typescript": "^4.7.2",
 		"typescript-cookie": "^1.0.3",
-		"websocket-ts": "^1.1.1"
+		"websocket-ts": "^1.1.1",
+		"dotenv-cli": "^5.1.0"
 	},
 	"type": "module"
 }

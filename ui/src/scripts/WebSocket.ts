@@ -1,7 +1,9 @@
 import {WebsocketBuilder} from 'websocket-ts';
 
 export function BuildWebSocket() : SendMessage{
-    let ws = new WebsocketBuilder('ws://localhost:8080')
+    let envAddress = import.meta.env.VITE_WEBSOCKET_ADDRESS
+    let address : string = envAddress ? envAddress : ""
+    let ws = new WebsocketBuilder(address)
         .onOpen((i, ev) => { console.log("opened") })
         .onClose((i, ev) => { console.log("closed") })
         .onError((i, ev) => { console.log("error") })
