@@ -1,6 +1,7 @@
 <script lang="ts">
     import {type SendMessage} from "../../scripts/WebSocket";
     import {onMount} from "svelte";
+    import Input from "../style/Input.svelte";
     export let sendMessage : SendMessage
 
     export let ValidLobbyCode : string
@@ -10,9 +11,8 @@
     let LobbyInputClass=""
     let QueriedLobbyCode=""
 
-    const lobbyCodeInput = e => {
+    function lobbyCodeInput(e) {
         LobbyCode = NumbersOnly(e.target.value).substring(0,6)
-
         if(LobbyCode.length == 6 && LobbyCode != QueriedLobbyCode){
             sendMessage("GetLobbyDataExternal",{code:LobbyCode})
             QueriedLobbyCode = LobbyCode
@@ -35,9 +35,12 @@
 
     function onLobbyFound(e:Event){
         let msg = (e as CustomEvent).detail
-        LobbyHelperText = msg["status"]
-        LobbyInputClass="valid"
-        ValidLobbyCode = LobbyCode
+        let lobbyCode = msg["lobby"]
+        if(lobbyCode == QueriedLobbyCode){
+            LobbyHelperText = msg["status"]
+            LobbyInputClass="valid"
+            ValidLobbyCode = QueriedLobbyCode
+        }
     }
 
 
@@ -56,32 +59,7 @@
             document.removeEventListener("LobbyNotFound",onLobbyNotFound)
         }
     })
+
 </script>
 
-
-<style>
-    .invalid{
-        border-color: red;
-        color: red;
-    }
-    .valid{
-        border-color: green;
-        color: green;
-    }
-</style>
-
-<label class="block text-gray-700 text-sm font-bold mb-2" for="lobbycode">
-    Lobby Code
-</label>
-<div class="shadow  border rounded w-full {LobbyInputClass}  leading-tight  focus:shadow-outline relative">
-    <input
-            required
-            class="appearance-none focus:outline-none bg-transparent py-2 px-3 w-full h-full text-gray-700"
-            id="lobbycode"
-            placeholder="LOBBY CODE"
-            type="tel"
-            bind:value={LobbyCode}
-            on:input={lobbyCodeInput}
-    />
-    <p class="text-xs italic text-right absolute bottom-0 right-1 select-none pointer-events-none">{LobbyHelperText}</p>
-</div>
+<Input Label="Lobby Code" ID="lobbycode" bind:Value={LobbyCode} OnInput={lobbyCodeInput} HelperText={LobbyHelperText} bind:Style={LobbyInputClass}/>
