@@ -1,11 +1,9 @@
 import {WebsocketBuilder} from 'websocket-ts';
 import {getCookie, setCookie} from "typescript-cookie";
+import {APP_CONFIG} from "./Config"
 
 export function BuildWebSocket() : SendMessage{
-    let envAddress = import.meta.env.VITE_WEBSOCKET_ADDRESS
-    let isSecure : boolean = import.meta.env.VITE_IS_SECURE === "true"
-    let address : string = envAddress ? envAddress : ""
-    let ws = new WebsocketBuilder(address)
+    let ws = new WebsocketBuilder(APP_CONFIG.WebSocketAddress)
         .onOpen((i, ev) => {
             console.log("websocket open!",ev)
             let sessionIDCookie : string | undefined = getCookie("session_id")
@@ -23,7 +21,7 @@ export function BuildWebSocket() : SendMessage{
                     body["sessionID"],
                     {expires:1,
                         sameSite:'Strict',
-                        secure: isSecure,
+                        secure: APP_CONFIG.WebSocketIsSecure,
                         domain:`.${window.location.hostname}`,
                         HostOnly:false})
                 return

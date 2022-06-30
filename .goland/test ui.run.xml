@@ -1,12 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="test ui" type="JavaScriptTestRunnerJest">
-    <config-file value="$PROJECT_DIR$/ui/jest.config.json" />
+  <configuration default="false" name="test ui" type="js.build_tools.npm">
+    <package-json value="$PROJECT_DIR$/ui/package.json" />
+    <command value="test" />
     <node-interpreter value="project" />
-    <node-options value="--experimental-vm-modules" />
-    <jest-package value="$PROJECT_DIR$/ui/node_modules/jest" />
-    <working-dir value="$PROJECT_DIR$/ui" />
     <envs />
-    <scope-kind value="ALL" />
     <method v="2" />
   </configuration>
 </component>
