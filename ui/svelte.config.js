@@ -15,6 +15,8 @@ const config = {
 		vite: {
 			test: {
 				environment: "jsdom",
+				globals: true, // required or setupTests will say expect is undefined -- however, discouraged
+				setupFiles: "src/setupTests.ts"
 			},
 		},
 	}
