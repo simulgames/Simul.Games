@@ -1,5 +1,5 @@
 import useWebSocket, {ReadyState} from "react-use-websocket";
-import {getCookie, setCookie} from "typescript-cookie";
+import {setCookie} from "typescript-cookie";
 import {useCallback} from "react";
 
 type message = {Header:string,Body?:any}
@@ -21,11 +21,7 @@ export const useConnection = () : [ConnectionState,SendMessage] => {
         `${REACT_APP_WEBSOCKET_ADDRESS}/`,
         {
             onOpen : (e:Event) => {
-                let ws = e.currentTarget as WebSocket
-                console.log("sending ID!")
-                let sessionIDCookie : string | undefined = getCookie("session_id")
-                let sessionID: string = sessionIDCookie ? sessionIDCookie : ""
-                ws.send(sessionID)
+                console.log("connected :",e)
             },
             onMessage: (message: MessageEvent) => {
                 let parsed = JSON.parse(message.data)
