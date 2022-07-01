@@ -28,7 +28,7 @@
         <JoinLobby bind:Username={Username}/>
     </Card>
     <Card>
-        <CreateLobby bind:Username={Username}/>
+        <CreateLobby sendMessage={sendMessage} bind:Username={Username}/>
     </Card>
 </div>
 
