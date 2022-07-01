@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"simul-app/server/user"
 	"simul-app/server/user/connection"
+	"strings"
 )
 
 type factory struct {
@@ -21,7 +22,9 @@ func (f factory) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	sessionID := ""
 	if cookieError == nil {
 		sessionID = sessionIDCookie.Value
-		log.Println("session reconnected: ", sessionID)
+		escapedSessionID := strings.Replace(sessionID, "\n", "", -1)
+		escapedSessionID = strings.Replace(escapedSessionID, "\r", "", -1)
+		log.Println("session reconnected: ", escapedSessionID)
 	}
 	go f.builder.Build(conn, sessionID)
 }

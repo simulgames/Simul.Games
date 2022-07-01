@@ -17,7 +17,7 @@ func TestFactoryBuildsIfNoError(t *testing.T) {
 	noError := mockConnection{false}
 	built := make(chan bool)
 	userFactory := New(noError, mockBuilder{built})
-	userFactory.ServeHTTP(nil, nil)
+	userFactory.ServeHTTP(nil, &http.Request{})
 	<-built
 }
 
@@ -36,13 +36,13 @@ type mockBuilder struct {
 	built chan bool
 }
 
-func (m mockBuilder) Build(_ connection.Connection) {
+func (m mockBuilder) Build(_ connection.Connection, _ string) {
 	m.built <- true
 }
 
 type builderThatPanicsIfAskedToBuild struct {
 }
 
-func (m builderThatPanicsIfAskedToBuild) Build(_ connection.Connection) {
+func (m builderThatPanicsIfAskedToBuild) Build(_ connection.Connection, _ string) {
 	panic("asked to build!")
 }
