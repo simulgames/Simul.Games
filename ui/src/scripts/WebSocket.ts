@@ -1,4 +1,4 @@
-import {WebsocketBuilder} from 'websocket-ts';
+import {LinearBackoff, TimeBuffer, WebsocketBuilder} from 'websocket-ts';
 import {getCookie, setCookie} from "typescript-cookie";
 import {APP_CONFIG} from "./Config"
 
@@ -12,6 +12,7 @@ export function BuildWebSocket() : SendMessage{
         })
         .onClose((i, ev) => { console.log("closed:",ev) })
         .onError((i, ev) => { console.log("error:",ev) })
+        .withBuffer(new TimeBuffer(5 * 60 * 1000))
         .onMessage((i, ev) => {
             let parsed = JSON.parse(ev.data)
             let header = parsed["header"]
@@ -35,6 +36,7 @@ export function BuildWebSocket() : SendMessage{
                 })
             document.dispatchEvent(event)
         })
+        .withBackoff(new LinearBackoff(0,1000,10000))
         .onRetry((i, ev) => { console.log("retrying:",ev) })
         .build();
     return (Header, Body) => ws.send(JSON.stringify({Header:Header,Body:Body}))
