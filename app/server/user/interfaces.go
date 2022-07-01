@@ -6,7 +6,7 @@ import (
 )
 
 type Builder interface {
-	Build(connection connection.Connection)
+	Build(connection connection.Connection, sessionID string)
 }
 
 type IDGenerator interface {
