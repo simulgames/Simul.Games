@@ -3,8 +3,20 @@
     import UsernameInput from "./subcomponents/UsernameInput.svelte";
     import SelectGame from "./subcomponents/SelectGame.svelte";
     import Button from "./style/Button.svelte";
+    import {type SendMessage} from "../scripts/WebSocket";
     export let Username = ""
     export let GameSelected = ""
+    export let  sendMessage : SendMessage = null
+
+    function hostGame(){
+        if(!isButtonDisabled){
+            let capitalizedHostName = Username[0].toUpperCase() + Username.substring(1).toLowerCase()
+            let isLastLetterS = capitalizedHostName.charAt(Username.length-1) === "s"
+            let lobbyName = `${capitalizedHostName}'${isLastLetterS ? "" : "s"} Lobby`
+            sendMessage("MakeLobby",{Lobby:{name:lobbyName,Game:GameSelected},Host:{Name:Username}})
+        }
+    }
+
     $: isButtonDisabled = (Username.length == 0 || GameSelected.length == 0)
 </script>
 
@@ -16,6 +28,6 @@
         <SelectGame bind:GameSelected={GameSelected}/>
     </div>
     <div class="flex items-center justify-center">
-        <Button text="HOST" icon="emoji_people" disabled={isButtonDisabled}/>
+        <Button text="HOST" icon="emoji_people" disabled={isButtonDisabled} OnClick={hostGame}/>
     </div>
 </form>

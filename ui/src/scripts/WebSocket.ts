@@ -36,7 +36,11 @@ export function BuildWebSocket() : SendMessage{
         .withBackoff(new LinearBackoff(0,1000,10000))
         .onRetry((i, ev) => { console.log("retrying:",ev) })
         .build();
-    return (Header, Body) => ws.send(JSON.stringify({Header:Header,Body:Body}))
+    return (Header, Body) => {
+        let msg =JSON.stringify({Header:Header,Body:Body})
+        console.log(msg)
+        ws.send(msg)
+    }
 }
 
 export type SendMessage = (Header:string, Body?:any) => void

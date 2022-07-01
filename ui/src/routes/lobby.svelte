@@ -9,6 +9,7 @@
     import {onMount} from "svelte";
     onMount(()=>{
         sendMessage = BuildWebSocket()
+        sendMessage("UserLocation")
         sendMessage("GetLobbyDataInternal")
     })
 
