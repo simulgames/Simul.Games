@@ -1,10 +1,10 @@
 <script>
     import DefaultAvatar from "./icons/DefaultAvatar.svelte";
-    export let fill = "grey"
+    export let colour = "pink"
 </script>
 
 <div class="w-full select-none relative">
-    <DefaultAvatar {fill}/>
+    <DefaultAvatar fill={colour}/>
     <span class="absolute bottom-1.5 right-1.5 w-[25%]">
         <slot/>
     </span>
