@@ -34,13 +34,7 @@ func (b builder) make(c connection.Connection) *user {
 	return usr
 }
 
-func (b builder) Build(connection connection.Connection) {
-	sID, err := connection.Read()
-	if err != nil {
-		connection.Close()
-		return
-	}
-	sessionID := string(sID)
+func (b builder) Build(connection connection.Connection, sessionID string) {
 	if sessionID != "" {
 		newConn, ok := b.sessionIDs[sessionID]
 		if ok {
