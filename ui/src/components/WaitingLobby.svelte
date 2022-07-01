@@ -1,4 +1,5 @@
 <script lang="ts">
+    export let sendMessage = null
 
     import Card from "./style/Card.svelte";
     import Button from "./style/Button.svelte";
