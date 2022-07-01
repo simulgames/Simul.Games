@@ -9,6 +9,12 @@
     export let Username = ""
     let LobbyCode = ""
     $: isButtonDisabled = (Username === "" || LobbyCode === "")
+
+    function sendJoinRequest(){
+        if(!isButtonDisabled){
+            sendMessage("JoinLobby",{code:LobbyCode,Name:Username})
+        }
+    }
 </script>
 
 <form>
@@ -16,9 +22,9 @@
         <UsernameInput bind:Username={Username}/>
     </div>
     <div class="mb-4">
-        <LobbyCodeInput ValidLobbyCode={LobbyCode} sendMessage={sendMessage}/>
+        <LobbyCodeInput bind:ValidLobbyCode={LobbyCode} sendMessage={sendMessage}/>
     </div>
     <div class="flex items-center justify-center">
-        <Button disabled={isButtonDisabled} icon="connect_without_contact" text="JOIN"/>
+        <Button disabled={isButtonDisabled} icon="connect_without_contact" text="JOIN" OnClick={sendJoinRequest}/>
     </div>
 </form>
