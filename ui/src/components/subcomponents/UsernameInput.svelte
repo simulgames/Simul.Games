@@ -4,7 +4,6 @@
     export let Username : string
 
     const usernameInput = e => {
-        console.log("hello")
         Username = e.target.value.substring(0,10).toUpperCase()
     }
 </script>
