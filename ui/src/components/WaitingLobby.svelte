@@ -8,6 +8,10 @@
     let hostName = "James'"
     let gameName = "Word Duel"
     let lobbyCode = "123456"
+    let showKey = true
+
+    $: keyIcon = showKey ? "key" : "key_off"
+    $: formattedLobbyCode = showKey ? `${lobbyCode.substring(0,3)}-${lobbyCode.substring(3)}` : "•••-•••"
 
 </script>
 
@@ -21,12 +25,10 @@
     <Card>
         <h1 class="text-xl text-primary-700 font-bold font-serif">{hostName} Lobby</h1>
         <div class="flex justify-between">
-            <div>
-                <span class="material-icons text-sm text-primary-700">
-                    key
-                </span>
-                <span class="font-mono text-sm">{lobbyCode}</span>
-            </div>
+            <button on:click={()=>{showKey=!showKey}}>
+                <span class="material-icons text-sm text-primary-700">{keyIcon}</span>
+                <span class="font-mono text-sm">{formattedLobbyCode}</span>
+            </button>
             <span class="text-primary-700 font-serif text-lg">
                 Playing <i>{gameName}</i>
             </span>
