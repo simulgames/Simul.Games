@@ -2,7 +2,6 @@ package builder
 
 import (
 	"encoding/json"
-	"errors"
 	"simul-app/server/message"
 	"simul-app/server/user/connection"
 	"testing"
@@ -17,18 +16,9 @@ func TestBuilderGivesNewSessionID(t *testing.T) {
 		msgIn:      []byte(""),
 		msgOut:     msgOut,
 		gotChannel: gotChannel,
-	})
+	}, "")
 	<-gotChannel
 	<-msgOut
-}
-
-func TestBuilderClosesConnectionIfReadError(t *testing.T) {
-	testBuilder := New(nil)
-	closedSignal := make(chan bool)
-	go testBuilder.Build(mockConnection{err: errors.New("read error"), closedSignal: closedSignal})
-	if closed := <-closedSignal; closed != true {
-		t.Fail()
-	}
 }
 
 func TestBuilderPassesOnConnectionIfHasSessionID(t *testing.T) {
@@ -37,6 +27,6 @@ func TestBuilderPassesOnConnectionIfHasSessionID(t *testing.T) {
 	sessionID := "hello, world!"
 	sessionIDs[sessionID] = newConnection
 	testBuilder := builder{sessionIDs: sessionIDs}
-	go testBuilder.Build(mockConnection{msgIn: []byte(sessionID)})
+	go testBuilder.Build(mockConnection{}, sessionID)
 	<-newConnection
 }
