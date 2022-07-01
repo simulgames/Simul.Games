@@ -1,14 +1,11 @@
 import {LinearBackoff, TimeBuffer, WebsocketBuilder} from 'websocket-ts';
-import {getCookie, setCookie} from "typescript-cookie";
+import {setCookie} from "typescript-cookie";
 import {APP_CONFIG} from "./Config"
 
 export function BuildWebSocket() : SendMessage{
     let ws = new WebsocketBuilder(APP_CONFIG.WebSocketAddress)
         .onOpen((i, ev) => {
             console.log("websocket open!",ev)
-            let sessionIDCookie : string | undefined = getCookie("session_id")
-            let sessionID: string = sessionIDCookie ? sessionIDCookie : ""
-            i.send(sessionID)
         })
         .onClose((i, ev) => { console.log("closed:",ev) })
         .onError((i, ev) => { console.log("error:",ev) })
