@@ -1,39 +1,28 @@
 <script lang="ts">
     import {onMount} from "svelte";
+    import {type LobbyData} from "../types/LobbyData"
+    import {type SendMessage} from "../scripts/WebSocket";
+    export let sendMessage :SendMessage = null
+    export let lobbyData : LobbyData
 
-    export let sendMessage = null
 
     import Card from "./style/Card.svelte";
     import Button from "./style/Button.svelte";
     import Avatar from "./style/Avatar.svelte";
     import LobbyHost from "./style/icons/LobbyHost.svelte";
 
-    let lobbyName = "Example's Lobby"
-    let gameName = "Word Duel"
-    let lobbyCode = "123456"
-    let ClientID = ""
-    let HostID = ""
     let showKey = true
-    type member = {name:string,color:string,id:string}
-    let members : [member] = []
+    let gameName = "Word Duel"
 
     $: keyIcon = showKey ? "key" : "key_off"
-    $: formattedLobbyCode = showKey ? `${lobbyCode.substring(0,3)}-${lobbyCode.substring(3)}` : "•••-•••"
+    $: formattedLobbyCode = showKey ? `${lobbyData.lobby.id.substring(0,3)}-${lobbyData.lobby.id.substring(3)}` : "•••-•••"
 
 
     function leaveLobby(){
         sendMessage("LeaveLobby")
     }
-
-    function OnGetLobbyData(e:Event){
-        let msg = (e as CustomEvent).detail
-        let lobby = msg["lobby"]
-        lobbyName = lobby["name"]
-        lobbyCode = lobby["id"]
-        HostID = lobby["host-id"]
-        ClientID = lobby["client-id"]
-        document.title = `Simul.Games • ${lobby["name"]}`
-        members = msg["members"]
+    function startGame(){
+        sendMessage("StartGame")
     }
 
 
@@ -43,21 +32,19 @@
 
 
     function OnMemberJoined(){
-
+        sendMessage("GetLobbyDataInternal") // todo - this is lazy, but for feature parity, this is the best approach for now
     }
 
 
     function OnMemberLeft(){
-
+        sendMessage("GetLobbyDataInternal") // todo - this is lazy, but for feature parity, this is the best approach for now
     }
 
     onMount(()=>{
-        document.addEventListener("LobbyData",OnGetLobbyData)
         document.addEventListener("GameStarting",OnGameStarted)
         document.addEventListener("MemberJoined",OnMemberJoined)
         document.addEventListener("MemberLeft",OnMemberLeft)
         return ()=>{
-            document.removeEventListener("LobbyData",OnGetLobbyData)
             document.removeEventListener("GameStarting",OnGameStarted)
             document.removeEventListener("MemberJoined",OnMemberJoined)
             document.removeEventListener("MemberLeft",OnMemberLeft)
@@ -74,7 +61,7 @@
 
 <div class="select-none">
     <Card>
-        <h1 class="text-xl text-primary-700 font-bold font-serif">{lobbyName}</h1>
+        <h1 class="text-xl text-primary-700 font-bold font-serif">{lobbyData.lobby.name}</h1>
         <div class="flex justify-between">
             <button on:click={()=>{showKey=!showKey}}>
                 <span class="material-icons text-sm text-primary-700">{keyIcon}</span>
@@ -86,14 +73,14 @@
         </div>
         <hr class="mb-5">
         <ul class="inline-grid justify-between w-full grid-columns list-none">
-                {#each members as member}
+                {#each lobbyData.members as member}
                     <li class="text-center">
                     <Avatar fill={member.color}>
-                        {#if member.id === HostID}
+                        {#if member.id === lobbyData.lobby["host-id"]}
                             <LobbyHost fill="#3B82F6"/>
                         {/if}
                     </Avatar>
-                    <span class="text-lg font-mono text-primary-700">{member.name}</span>
+                    <span class="text-lg font-mono text-primary-700 {member.id === lobbyData['client-id'] ? 'font-bold' : ''}">{member.name}</span>
                     </li>
                 {/each}
         </ul>
@@ -103,7 +90,8 @@
                 <Button text="LEAVE" icon="logout" OnClick={leaveLobby}/>
             </div>
             <div class="flex-[0.25] w-full">
-                <Button text="START" icon="play_arrow"/>
+                <!-- todo - change to a "READY" button for non hosts -->
+                <Button text="START" icon="play_arrow" disabled={lobbyData['client-id']!==lobbyData.lobby["host-id"]} OnClick={startGame}/>
             </div>
         </div>
     </Card>
