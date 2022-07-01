@@ -7,10 +7,20 @@
     import {BuildWebSocket,type SendMessage} from "../scripts/WebSocket"
     let sendMessage : SendMessage = null
     import {onMount} from "svelte";
+    import { goto } from "$app/navigation"
+
+    function goToHomePage(){
+        goto("/")
+    }
+
     onMount(()=>{
         sendMessage = BuildWebSocket()
         sendMessage("UserLocation")
         sendMessage("GetLobbyDataInternal")
+        document.addEventListener("LobbyLeft",goToHomePage)
+        return ()=>{
+            document.removeEventListener("LobbyLeft",goToHomePage)
+        }
     })
 
 </script>
