@@ -8,12 +8,14 @@
         })
         document.dispatchEvent(keyboardEvent)
     }
+    export let disabled = false
 </script>
 
 <button class=" border-slate-300 border-2 h-12 {width} bg-white shadow-md rounded mx-auto flex-grow text-3xl align-text-bottom
         hover:bg-slate-100 hover:border-slate-500
         {icon !== '' ? 'material-icons' : ''}"
         on:click={pressKey}
+        {disabled}
     >
     {icon !== '' ? icon : key.toUpperCase()}
 </button>

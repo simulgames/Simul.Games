@@ -10,7 +10,7 @@
 
 
     type result = any
-    type GameInfo = { Guesses : {id:[number[string]]},
+    export type GameInfo = { Guesses : {id:[number[string]]},
                     Results : {id:[number[number]]},
                     Successful: boolean,
                     HasClientFinished: boolean,
@@ -23,28 +23,70 @@
         console.log(gameInfo)
     }
 
+
+    let maxLength = 5
+    let currentGuess = ""
+    $: guessIsRightLength = currentGuess.length == maxLength
+    let awaitingReply = false
+
     function keyUp(e){
-        console.log(e)
+        if(awaitingReply){
+            return;
+        }
+        let key = (e as KeyboardEvent).key
+        if(key == "Backspace"){
+            currentGuess = currentGuess.substring(0,currentGuess.length-1)
+            return;
+        }
+
+        if(key == "Enter"){
+            if(guessIsRightLength){
+                sendMessage("SubmitWord",{guess:currentGuess})
+                awaitingReply = true
+            }
+            return;
+        }
+
+        if(guessIsRightLength){
+            return
+        }
+
+        currentGuess = currentGuess + key.toUpperCase()
+    }
+
+
+    function CompareResultClient(e:Event){
+        let msg = (e as CustomEvent).detail
+        if(msg["status"] == "error"){
+            console.log("not a word!")
+        }
+        awaitingReply = false
     }
 
     onMount(()=>{
         sendMessage("GameInfo")
         document.addEventListener("GameInfo",setGameInfo)
+        document.addEventListener("CompareResultClient",CompareResultClient)
         document.addEventListener("keydown",keyUp)
         return ()=>{
             document.removeEventListener("GameInfo",setGameInfo)
+            document.removeEventListener("CompareResultClient",CompareResultClient)
             document.removeEventListener("keydown",keyUp)
         }
     })
 </script>
+{#if gameInfo != null}
+    <ul>
+        {#each lobbyData.members as member}
+        <li>
+            {member.name}
+        </li>
+        {/each}
+    </ul>
 
-<ul>
-    {#each lobbyData.members as member}
-    <li>
-        {member.name}
-    </li>
-    {/each}
-</ul>
-
-<GameBoard/>
-<Keyboard/>
+    <GameBoard Guesses= {gameInfo.Guesses[lobbyData["client-id"]]}
+               Results= {gameInfo.Results[lobbyData["client-id"]]}
+               bind:CurrentWord={currentGuess}
+    />
+    <Keyboard isEnterDisabled={!guessIsRightLength}/>
+{/if}

@@ -1,6 +1,6 @@
 <script lang="ts">
-
-import KeyButton from "../style/KeyButton.svelte";
+    import KeyButton from "../style/KeyButton.svelte";
+    export let isEnterDisabled = false
 </script>
 
 <div class="text-center mt-4">
@@ -36,5 +36,5 @@ import KeyButton from "../style/KeyButton.svelte";
     <KeyButton key="b"/>
     <KeyButton key="n"/>
     <KeyButton key="m"/>
-    <KeyButton icon="keyboard_return" key="Enter" width="w-20"/>
+    <KeyButton icon="keyboard_return" key="Enter" width="w-20" disabled={isEnterDisabled}/>
 </div>
