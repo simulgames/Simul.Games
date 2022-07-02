@@ -165,7 +165,7 @@
                Results= {results}
                bind:CurrentWord={currentGuess}
     />
-    <div class="mx-10">
+    <div class="mx-[3vw]">
         <div class="justify-center max-w-[40rem] mx-auto">
             <Keyboard isEnterDisabled={!guessIsRightLength} KeyBoardClasses={KeyBoardClasses()}/>
         </div>
