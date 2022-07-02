@@ -30,7 +30,7 @@
     let awaitingReply = false
 
     function keyUp(e){
-        if(awaitingReply){
+        if(awaitingReply || gameInfo["HasClientFinished"]){
             return;
         }
         let key = (e as KeyboardEvent).key
@@ -51,16 +51,49 @@
             return
         }
 
-        currentGuess = currentGuess + key.toUpperCase()
+        if(isCharacterALatinLetter(key.toUpperCase())){
+            currentGuess = currentGuess + key.toUpperCase()
+        }
     }
 
 
+    function isCharacterALatinLetter(char:string) {
+        if(char.length > 1){
+            return false
+        }
+        return (/[A-Z]/).test(char)
+    }
+
     function CompareResultClient(e:Event){
         let msg = (e as CustomEvent).detail
+        awaitingReply = false
         if(msg["status"] == "error"){
             console.log("not a word!")
+            return
         }
-        awaitingReply = false
+        if(msg["status"] == "finished"){
+            gameInfo["HasClientFinished"] = true
+        }
+
+        let updatedGuesses : [string] = [...gameInfo.Guesses[lobbyData["client-id"]]]
+        updatedGuesses.push(msg["guess"])
+        gameInfo.Guesses[lobbyData["client-id"]] = updatedGuesses
+
+        let result : [string] = msg["result"].slice(1,-1).split(" ")
+        let updatedResults : [[number]] = [...gameInfo.Results[lobbyData["client-id"]]]
+        updatedResults.push([])
+        let turn : number = msg["turn"]
+        for(let i=0;i<result.length;i++){
+            setTimeout(()=>{
+                updatedResults[turn].push(Number(result[i]))
+                gameInfo.Results[lobbyData["client-id"]] = [...updatedResults]
+            },i*500)
+        }
+
+        currentGuess = ""
+        setTimeout(()=>{
+
+        })
     }
 
     onMount(()=>{
