@@ -7,11 +7,17 @@
         })
         document.dispatchEvent(keyboardEvent)
     }
+    export let Class = ""
     export let disabled = false
 </script>
 
-<button class=" border-slate-300 border-2 bg-white shadow-md rounded w-full flex-grow
-        hover:bg-slate-100 hover:border-slate-500 relative h-16"
+<button class="h-16 border-2 bg-white rounded flex-grow
+        enabled:hover:bg-slate-100 enabled:hover:border-slate-500 relative
+        enabled:shadow-md
+        enabled:border-slate-300
+        disabled:bg-gray-400
+        disabled:text-white
+        {Class}"
         on:click={pressKey}
         {disabled}
     >
