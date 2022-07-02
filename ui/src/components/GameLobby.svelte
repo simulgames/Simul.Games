@@ -41,24 +41,8 @@
         }
         let keyboardClasses : {id:string} = {}
         for (let key in keyboardResults) {
-            let style = "key-with-result "
-            switch (keyboardResults[key]){
-                case 0:{
-                    style += "no-letter"
-                    break
-                }
-                case 1:{
-                    style += "has-letter"
-                    break
-                }
-                case 2:{
-                    style += "has-letter-at-space"
-                    break
-                }
-            }
-            keyboardClasses[key] = style
+            keyboardClasses[key] = getStyle("key-with-result",keyboardResults[key])
         }
-        console.log(keyboardClasses)
         return keyboardClasses
     }
 
@@ -94,6 +78,14 @@
         }
     }
 
+    const styles = {0:'no-letter',1:'has-letter',2:'has-letter-at-space'}
+
+    const getStyle = (base: string, result:number) => {
+        if(result != null){
+            return base + " " + styles[result]
+        }
+        return ""
+    }
 
     function isCharacterALatinLetter(char:string) {
         if(char.length > 1){
@@ -147,6 +139,42 @@
             document.removeEventListener("keydown",keyUp)
         }
     })
+
+
+
+    let width = 5
+    let height = 6
+
+    $: getLetter = (turn : number, character : number,isClient: boolean) => {
+        let currentTurn = guesses.length
+        if(isClient && turn != height && turn == currentTurn){
+            if(character < currentGuess.length){
+                return currentGuess[character]
+            }
+            return ""
+        }
+        if(guesses[turn] != null){
+            return guesses[turn][character]
+        }
+        return ""
+    }
+
+    $: tileBoard = (id:string) : [[{letter:string,style:string}]] => {
+        let results = gameInfo.Results[id]
+        let isClient = id == lobbyData["client-id"]
+        let tileBoard : [[{letter:string,style:string}]] = []
+        for(let turn = 0; turn<height; turn++){
+            tileBoard.push([])
+            for(let i = 0; i<width; i++){
+                let letter = getLetter(turn,i,isClient)
+                let result = results[turn] ? results[turn][i] : null
+                let style = getStyle("tile-with-result",result)
+                let tile = {letter,style}
+                tileBoard[turn].push(tile)
+            }
+        }
+        return tileBoard
+    }
 </script>
 
 
@@ -161,10 +189,9 @@
         {/each}
     </ul>
 
-    <GameBoard Guesses= {guesses}
-               Results= {results}
-               bind:CurrentWord={currentGuess}
-    />
+    <div class="flex mx-[30vw]">
+        <GameBoard TileBoard={tileBoard(lobbyData["client-id"])}/>
+    </div>
     <div class="mx-[3vw]">
         <div class="justify-center max-w-[40rem] mx-auto">
             <Keyboard isEnterDisabled={!guessIsRightLength} KeyBoardClasses={KeyBoardClasses()}/>
