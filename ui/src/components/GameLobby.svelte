@@ -1,7 +1,6 @@
 <script lang="ts">
     import {type LobbyData} from "../types/LobbyData";
     import {onMount} from "svelte";
-
     export let lobbyData : LobbyData = null
     import { SendMessage} from "../scripts/WebSocket";
     import Keyboard from "./subcomponents/Keyboard.svelte";
@@ -16,12 +15,52 @@
                     HasFinished: boolean,
                     Word : string
     }
+
+
+    $: results = gameInfo ? gameInfo.Results[lobbyData["client-id"]] : [[]]
+    $: guesses = gameInfo ? gameInfo.Guesses[lobbyData["client-id"]] : [[]]
+
     let gameInfo : GameInfo = null
     function setGameInfo(e:Event){
         gameInfo = (e as CustomEvent).detail
         console.log(gameInfo)
     }
 
+    $ : KeyBoardClasses = () => {
+        let keyboardResults : {id:number} = {}
+        for(let turn = 0; turn< results.length;turn++){
+            let guess : string = guesses[turn]
+            let result : [number] = results[turn]
+            for(let i = 0;i<result.length;i++){
+                let letter : string = guess[i]
+                if(keyboardResults[letter] && result[i] < keyboardResults[i]) {
+                    continue
+                }
+                keyboardResults[letter] = result[i]
+            }
+        }
+        let keyboardClasses : {id:string} = {}
+        for (let key in keyboardResults) {
+            let style = "key-with-result "
+            switch (keyboardResults[key]){
+                case 0:{
+                    style += "no-letter"
+                    break
+                }
+                case 1:{
+                    style += "has-letter"
+                    break
+                }
+                case 2:{
+                    style += "has-letter-at-space"
+                    break
+                }
+            }
+            keyboardClasses[key] = style
+        }
+        console.log(keyboardClasses)
+        return keyboardClasses
+    }
 
     let maxLength = 5
     let currentGuess = ""
@@ -110,6 +149,9 @@
     })
 </script>
 
+
+<link rel="stylesheet" href="src/components/style/word-duel.css" />
+
 {#if gameInfo != null}
     <ul>
         {#each lobbyData.members as member}
@@ -119,13 +161,13 @@
         {/each}
     </ul>
 
-    <GameBoard Guesses= {gameInfo.Guesses[lobbyData["client-id"]]}
-               Results= {gameInfo.Results[lobbyData["client-id"]]}
+    <GameBoard Guesses= {guesses}
+               Results= {results}
                bind:CurrentWord={currentGuess}
     />
     <div class="mx-10">
         <div class="justify-center max-w-[40rem] mx-auto">
-            <Keyboard isEnterDisabled={!guessIsRightLength}/>
+            <Keyboard isEnterDisabled={!guessIsRightLength} KeyBoardClasses={KeyBoardClasses()}/>
         </div>
     </div>
 {/if}
