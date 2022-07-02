@@ -7,14 +7,15 @@
     let height = 6
 
     $: getCharacter = (turn : string,character : string) => {
-        let currentTurn = Guesses.length-1
-        if(Guesses[turn] != null){
-            return Guesses[turn][character]
-        }
-        if(turn == currentTurn){
+        let currentTurn = Guesses.length
+        if(turn != height && turn == currentTurn){
             if(character < CurrentWord.length){
                 return CurrentWord[character]
             }
+            return ""
+        }
+        if(Guesses[turn] != null){
+            return Guesses[turn][character]
         }
         return ""
     }
