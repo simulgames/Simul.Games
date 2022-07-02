@@ -1,8 +1,7 @@
 <script lang="ts">
     import {onMount} from "svelte";
     import {type LobbyData} from "../types/LobbyData"
-    import {type SendMessage} from "../scripts/WebSocket";
-    export let sendMessage :SendMessage = null
+    import {SendMessage} from "../scripts/WebSocket";
     export let lobbyData : LobbyData
 
 
@@ -15,14 +14,14 @@
     let gameName = "Word Duel"
 
     $: keyIcon = showKey ? "key" : "key_off"
-    $: formattedLobbyCode = showKey ? `${lobbyData.lobby.id.substring(0,3)}-${lobbyData.lobby.id.substring(3)}` : "•••-•••"
+    $: formattedLobbyCode = showKey && lobbyData ? `${lobbyData.lobby.id.substring(0,3)}-${lobbyData.lobby.id.substring(3)}` : "•••-•••"
 
 
     function leaveLobby(){
-        sendMessage("LeaveLobby")
+        SendMessage("LeaveLobby")
     }
     function startGame(){
-        sendMessage("StartGame")
+        SendMessage("StartGame")
     }
 
 
@@ -32,12 +31,12 @@
 
 
     function OnMemberJoined(){
-        sendMessage("GetLobbyDataInternal") // todo - this is lazy, but for feature parity, this is the best approach for now
+        SendMessage("GetLobbyDataInternal") // todo - this is lazy, but for feature parity, this is the best approach for now
     }
 
 
     function OnMemberLeft(){
-        sendMessage("GetLobbyDataInternal") // todo - this is lazy, but for feature parity, this is the best approach for now
+        SendMessage("GetLobbyDataInternal") // todo - this is lazy, but for feature parity, this is the best approach for now
     }
 
     onMount(()=>{
