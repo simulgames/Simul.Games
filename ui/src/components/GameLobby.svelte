@@ -75,25 +75,27 @@
             gameInfo["HasClientFinished"] = true
         }
 
-        let updatedGuesses : [string] = [...gameInfo.Guesses[lobbyData["client-id"]]]
+        let turn : number = msg["turn"]
+        let updatedGuesses : [[string]] = [...gameInfo.Guesses[lobbyData["client-id"]]]
+        if(updatedGuesses.length != turn){
+            return;
+        }
         updatedGuesses.push(msg["guess"])
         gameInfo.Guesses[lobbyData["client-id"]] = updatedGuesses
 
         let result : [string] = msg["result"].slice(1,-1).split(" ")
         let updatedResults : [[number]] = [...gameInfo.Results[lobbyData["client-id"]]]
         updatedResults.push([])
-        let turn : number = msg["turn"]
+        gameInfo.Results[lobbyData["client-id"]] = updatedResults
         for(let i=0;i<result.length;i++){
             setTimeout(()=>{
+                let updatedResults : [[number]] = [...gameInfo.Results[lobbyData["client-id"]]]
                 updatedResults[turn].push(Number(result[i]))
                 gameInfo.Results[lobbyData["client-id"]] = [...updatedResults]
             },i*500)
         }
 
         currentGuess = ""
-        setTimeout(()=>{
-
-        })
     }
 
     onMount(()=>{
@@ -108,6 +110,7 @@
         }
     })
 </script>
+
 {#if gameInfo != null}
     <ul>
         {#each lobbyData.members as member}
