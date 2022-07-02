@@ -123,5 +123,9 @@
                Results= {gameInfo.Results[lobbyData["client-id"]]}
                bind:CurrentWord={currentGuess}
     />
-    <Keyboard isEnterDisabled={!guessIsRightLength}/>
+    <div class="mx-10">
+        <div class="justify-center max-w-[40rem] mx-auto">
+            <Keyboard isEnterDisabled={!guessIsRightLength}/>
+        </div>
+    </div>
 {/if}
