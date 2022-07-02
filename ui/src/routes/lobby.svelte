@@ -19,16 +19,25 @@
         lobbyData["has-started"] = true
     }
 
+    function goToHomePageIfNotInLobby(e:Event){
+        let userLocation = (e as CustomEvent).detail
+        if(userLocation["inLobby"] == "false"){
+            goToHomePage()
+        }
+    }
+
     onMount(()=>{
         sendMessage = BuildWebSocket()
         sendMessage("UserLocation")
         sendMessage("GetLobbyDataInternal")
         document.addEventListener("LobbyLeft",goToHomePage)
+        document.addEventListener("UserLocation",goToHomePageIfNotInLobby)
         document.addEventListener("GameStarting",gameStarted)
         document.addEventListener("LobbyData",OnGetLobbyData)
         return ()=>{
             document.removeEventListener("LobbyLeft",goToHomePage)
             document.removeEventListener("GameStarting",gameStarted)
+            document.removeEventListener("UserLocation",goToHomePageIfNotInLobby)
             document.removeEventListener("LobbyData",OnGetLobbyData)
         }
     })
