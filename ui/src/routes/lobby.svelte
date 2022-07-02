@@ -15,14 +15,20 @@
         goto("/")
     }
 
+    function gameStarted(){
+        lobbyData["has-started"] = true
+    }
+
     onMount(()=>{
         sendMessage = BuildWebSocket()
         sendMessage("UserLocation")
         sendMessage("GetLobbyDataInternal")
         document.addEventListener("LobbyLeft",goToHomePage)
+        document.addEventListener("GameStarting",gameStarted)
         document.addEventListener("LobbyData",OnGetLobbyData)
         return ()=>{
             document.removeEventListener("LobbyLeft",goToHomePage)
+            document.removeEventListener("GameStarting",gameStarted)
             document.removeEventListener("LobbyData",OnGetLobbyData)
         }
     })
