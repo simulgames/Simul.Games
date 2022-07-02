@@ -9,6 +9,7 @@
     import { goto } from "$app/navigation"
     import {type LobbyData} from "../types/LobbyData"
     import GameLobby from "../components/GameLobby.svelte";
+    import IconButton from "../components/style/IconButton.svelte";
 
     function goToHomePage(){
         goto("/")
@@ -36,10 +37,15 @@
         lobbyData = (e as CustomEvent).detail
         loadedData = true
     }
+    function Exit(){
+        sendMessage("LeaveLobby")
+    }
 
 </script>
 
-<Header/>
+<Header>
+    <IconButton icon="exit_to_app" OnClick={Exit}/>
+</Header>
 
 {#if !lobbyData["has-started"]}
     <div class="min-w-fit max-w-[95%] w-[50rem] mx-auto">
