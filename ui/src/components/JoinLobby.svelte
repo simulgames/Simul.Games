@@ -1,7 +1,5 @@
 <script lang="ts">
-    import {type SendMessage} from "../scripts/WebSocket";
-
-    export let sendMessage : SendMessage
+    import {SendMessage} from "../scripts/WebSocket";
     import LobbyCodeInput from "./subcomponents/LobbyCodeInput.svelte";
     import UsernameInput from "./subcomponents/UsernameInput.svelte";
     import Button from "./style/Button.svelte";
@@ -12,7 +10,7 @@
 
     function sendJoinRequest(){
         if(!isButtonDisabled){
-            sendMessage("JoinLobby",{code:LobbyCode,Name:Username})
+            SendMessage("JoinLobby",{code:LobbyCode,Name:Username})
         }
     }
 </script>
@@ -22,7 +20,7 @@
         <UsernameInput bind:Username={Username}/>
     </div>
     <div class="mb-4">
-        <LobbyCodeInput bind:ValidLobbyCode={LobbyCode} sendMessage={sendMessage}/>
+        <LobbyCodeInput bind:ValidLobbyCode={LobbyCode} sendMessage={SendMessage}/>
     </div>
     <div class="flex items-center justify-center">
         <Button disabled={isButtonDisabled} icon="connect_without_contact" text="JOIN" OnClick={sendJoinRequest}/>

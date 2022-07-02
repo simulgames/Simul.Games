@@ -3,8 +3,7 @@
     import Header from "../components/Header.svelte"
     import Footer from "../components/Footer.svelte"
     import WaitingLobby from "../components/WaitingLobby.svelte";
-    import {BuildWebSocket,type SendMessage} from "../scripts/WebSocket"
-    let sendMessage : SendMessage = null
+    import {SendMessage} from "../scripts/WebSocket"
     import {onMount} from "svelte";
     import { goto } from "$app/navigation"
     import {type LobbyData} from "../types/LobbyData"
@@ -27,9 +26,8 @@
     }
 
     onMount(()=>{
-        sendMessage = BuildWebSocket()
-        sendMessage("UserLocation")
-        sendMessage("GetLobbyDataInternal")
+        SendMessage("UserLocation")
+        SendMessage("GetLobbyDataInternal")
         document.addEventListener("LobbyLeft",goToHomePage)
         document.addEventListener("UserLocation",goToHomePageIfNotInLobby)
         document.addEventListener("GameStarting",gameStarted)
@@ -53,7 +51,7 @@
         loadedData = true
     }
     function Exit(){
-        sendMessage("LeaveLobby")
+        SendMessage("LeaveLobby")
     }
 
 </script>
@@ -65,12 +63,12 @@
 {#if !lobbyData["has-started"]}
     <div class="min-w-fit max-w-[95%] w-[50rem] mx-auto">
         {#if loadedData}
-            <WaitingLobby sendMessage={sendMessage} lobbyData={lobbyData}/>
+            <WaitingLobby lobbyData={lobbyData}/>
         {/if}
     </div>
     <Footer/>
 {/if}
 
 {#if lobbyData["has-started"]}
-    <GameLobby sendMessage={sendMessage} lobbyData={lobbyData}/>
+    <GameLobby lobbyData={lobbyData}/>
 {/if}

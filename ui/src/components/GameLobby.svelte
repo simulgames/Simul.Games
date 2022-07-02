@@ -3,8 +3,7 @@
     import {onMount} from "svelte";
 
     export let lobbyData : LobbyData = null
-    import {type SendMessage} from "../scripts/WebSocket";
-    export let sendMessage : SendMessage = null
+    import { SendMessage} from "../scripts/WebSocket";
     import Keyboard from "./subcomponents/Keyboard.svelte";
     import GameBoard from "./subcomponents/GameBoard.svelte";
 
@@ -41,7 +40,7 @@
 
         if(key == "Enter"){
             if(guessIsRightLength){
-                sendMessage("SubmitWord",{guess:currentGuess})
+                SendMessage("SubmitWord",{guess:currentGuess})
                 awaitingReply = true
             }
             return;
@@ -99,7 +98,7 @@
     }
 
     onMount(()=>{
-        sendMessage("GameInfo")
+        SendMessage("GameInfo")
         document.addEventListener("GameInfo",setGameInfo)
         document.addEventListener("CompareResultClient",CompareResultClient)
         document.addEventListener("keydown",keyUp)
