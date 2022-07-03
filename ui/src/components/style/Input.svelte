@@ -8,7 +8,7 @@
     export let Style : string | null = null
 </script>
 
-<label class="block text-gray-700 text-sm font-bold mb-2" for={ID}>
+<label class="block text-gray-700 text-sm font-bold mb-2 dark:text-white" for={ID}>
     {Label}
 </label>
 
@@ -23,9 +23,9 @@
     }
 </style>
 
-<div class="shadow  border rounded w-full {Style}  leading-tight  focus:shadow-outline relative">
+<div class="shadow border rounded w-full  leading-tight  focus:shadow-outline relative dark:border-zinc-400 {Style}">
     <input
-            class="appearance-none focus:outline-none bg-transparent py-2 px-3 w-full h-full text-gray-700"
+            class="appearance-none focus:outline-none bg-transparent py-2 px-3 w-full h-full text-gray-700 dark:text-white"
             placeholder={Label.toUpperCase()}
             bind:value={Value}
             on:input={OnInput}

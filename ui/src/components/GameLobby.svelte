@@ -210,8 +210,8 @@
     <ul class="flex mx-auto overflow-auto pb-3 whitespace-nowrap justify-center list-none">
         {#each lobbyData.members as member}
         <li class="w-[6rem] md:w-[7rem] text-xs font-mono font-bold m-1">
-            <div class="w-full bg-white shadow-md rounded text-center p-2">
-                <span class="text-sm font-medium text-primary-500">{member.name}</span>
+            <div class="w-full bg-white dark:bg-zinc-800 shadow-md rounded text-center p-2">
+                <span class="text-sm font-medium text-primary-500 dark:text-white">{member.name}</span>
                 <GameBoard TileBoard={tileBoard(member.id)} Class="gap-0.5" TileClass="small-tile"></GameBoard>
             </div>
         </li>
@@ -219,7 +219,7 @@
     </ul>
 
     <div class="flex mx-auto w-[32vh] max-w-[90vw] text-2xl md:text-3xl font-bold font-serif">
-        <GameBoard TileBoard={tileBoard(lobbyData["client-id"])} Class="flex-grow gap-[1vw] md:gap-[0.5rem]" TileClass="bg-white rounded shadow-md"/>
+        <GameBoard TileBoard={tileBoard(lobbyData["client-id"])} Class="flex-grow gap-[1vw] md:gap-[0.5rem]" TileClass="bg-white rounded shadow-md dark:bg-zinc-800 dark:text-white"/>
     </div>
     <div class="mx-[3vw]">
         <div class="justify-center max-w-[40rem] mx-auto">

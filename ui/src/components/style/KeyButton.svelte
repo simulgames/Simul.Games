@@ -17,6 +17,12 @@
         enabled:border-slate-300
         disabled:bg-gray-400
         disabled:text-white
+        dark:bg-zinc-700
+        dark:border-zinc-800
+        dark:enabled:hover:bg-zinc-600
+        dark:text-white
+        dark:disabled:bg-zinc-800
+        dark:disabled:text-zinc-400
         {Class}"
         on:click={pressKey}
         {disabled}
