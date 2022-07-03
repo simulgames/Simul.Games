@@ -25,18 +25,14 @@
         let initialValue : boolean = BrowserPrefersDarkMode() !== localStorageOverride()
         DarkMode.set(initialValue)
         DarkMode.subscribe( (value:boolean)=>{
-            console.log("changing dark mode!")
             if(value == BrowserPrefersDarkMode()){
                 localStorage.removeItem('override-browser-dark-mode')
             } else {
                 localStorage.setItem('override-browser-dark-mode','1')
             }
-
             if(value){
-                console.log("updating dark to on")
                 document.documentElement.classList.add('dark')
             } else {
-                console.log("updating dark to off")
                 document.documentElement.classList.remove('dark')
             }
         })
