@@ -32,3 +32,8 @@
 .has-letter-at-space {
     --bg-color-to-transition-to: #6aaa64;
 }
+
+.small-tile{
+    background-color: #cbced1;
+    color: #cbced1;
+}
