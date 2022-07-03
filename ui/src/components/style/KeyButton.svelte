@@ -11,7 +11,7 @@
     export let disabled = false
 </script>
 
-<button class="h-16 border-2 bg-white rounded flex-grow
+<button class="h-[3rem] border-2 bg-white rounded flex-grow
         enabled:hover:bg-slate-100 enabled:hover:border-slate-500 relative
         enabled:shadow-md
         enabled:border-slate-300
