@@ -1,6 +1,8 @@
 <script lang="ts">
     import Tile from "../style/Tile.svelte";
+    export let Class : string = ""
     export let TileBoard : [[{letter:string,style:string}]]
+    export let TileClass : string = ""
 </script>
 
 <style>
@@ -9,10 +11,10 @@
     }
 </style>
 
-<div class="grid-column mx-auto grid flex-grow gap-[1vw]">
+<div class="grid-column grid {Class}">
     {#each TileBoard as turn}
         {#each turn as tile}
-            <Tile character={tile.letter} style={tile.style}/>
+            <Tile character={tile.letter} style={tile.style + " " + TileClass}/>
         {/each}
     {/each}
 </div>
