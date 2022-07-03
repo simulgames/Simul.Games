@@ -32,11 +32,15 @@
         document.addEventListener("UserLocation",goToHomePageIfNotInLobby)
         document.addEventListener("GameStarting",gameStarted)
         document.addEventListener("LobbyData",OnGetLobbyData)
+        document.addEventListener("MemberJoined",OnMemberJoined)
+        document.addEventListener("MemberLeft",OnMemberLeft)
         return ()=>{
             document.removeEventListener("LobbyLeft",goToHomePage)
             document.removeEventListener("GameStarting",gameStarted)
             document.removeEventListener("UserLocation",goToHomePageIfNotInLobby)
             document.removeEventListener("LobbyData",OnGetLobbyData)
+            document.removeEventListener("MemberJoined",OnMemberJoined)
+            document.removeEventListener("MemberLeft",OnMemberLeft)
         }
     })
 
@@ -49,6 +53,15 @@
     function OnGetLobbyData(e:Event){
         lobbyData = (e as CustomEvent).detail
         loadedData = true
+    }
+
+    function OnMemberJoined(){
+        SendMessage("GetLobbyDataInternal") // todo - this is lazy, but for feature parity, this is the best approach for now
+    }
+
+
+    function OnMemberLeft(){
+        SendMessage("GetLobbyDataInternal") // todo - this is lazy, but for feature parity, this is the best approach for now
     }
     function Exit(){
         SendMessage("LeaveLobby")

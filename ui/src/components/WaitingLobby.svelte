@@ -23,33 +23,6 @@
     function startGame(){
         SendMessage("StartGame")
     }
-
-
-    function OnGameStarted(){
-
-    }
-
-
-    function OnMemberJoined(){
-        SendMessage("GetLobbyDataInternal") // todo - this is lazy, but for feature parity, this is the best approach for now
-    }
-
-
-    function OnMemberLeft(){
-        SendMessage("GetLobbyDataInternal") // todo - this is lazy, but for feature parity, this is the best approach for now
-    }
-
-    onMount(()=>{
-        document.addEventListener("GameStarting",OnGameStarted)
-        document.addEventListener("MemberJoined",OnMemberJoined)
-        document.addEventListener("MemberLeft",OnMemberLeft)
-        return ()=>{
-            document.removeEventListener("GameStarting",OnGameStarted)
-            document.removeEventListener("MemberJoined",OnMemberJoined)
-            document.removeEventListener("MemberLeft",OnMemberLeft)
-        }
-    })
-
 </script>
 
 <style>
