@@ -1,5 +1,4 @@
 <script lang="ts">
-    import {onMount} from "svelte";
     import {type LobbyData} from "../types/LobbyData"
     import {SendMessage} from "../scripts/WebSocket";
     export let lobbyData : LobbyData

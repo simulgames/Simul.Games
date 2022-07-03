@@ -3,17 +3,16 @@
     import UsernameInput from "./subcomponents/UsernameInput.svelte";
     import SelectGame from "./subcomponents/SelectGame.svelte";
     import Button from "./style/Button.svelte";
-    import {type SendMessage} from "../scripts/WebSocket";
+    import {SendMessage} from "../scripts/WebSocket";
     export let Username = ""
     export let GameSelected = ""
-    export let  sendMessage : SendMessage = null
 
     function hostGame(){
         if(!isButtonDisabled){
             let capitalizedHostName = Username[0].toUpperCase() + Username.substring(1).toLowerCase()
             let isLastLetterS = capitalizedHostName.charAt(Username.length-1) === "s"
             let lobbyName = `${capitalizedHostName}'${isLastLetterS ? "" : "s"} Lobby`
-            sendMessage("MakeLobby",{Lobby:{name:lobbyName,Game:GameSelected},Host:{Name:Username}})
+            SendMessage("MakeLobby",{Lobby:{name:lobbyName,Game:GameSelected},Host:{Name:Username}})
         }
     }
 
