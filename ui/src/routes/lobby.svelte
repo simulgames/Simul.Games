@@ -4,8 +4,7 @@
     import Footer from "../components/Footer.svelte"
     import WaitingLobby from "../components/WaitingLobby.svelte";
     let inGame = false
-    import {BuildWebSocket,type SendMessage} from "../scripts/WebSocket"
-    let sendMessage : SendMessage = null
+    import {SendMessage} from "../scripts/WebSocket"
     import {onMount} from "svelte";
     import { goto } from "$app/navigation"
 
@@ -14,9 +13,8 @@
     }
 
     onMount(()=>{
-        sendMessage = BuildWebSocket()
-        sendMessage("UserLocation")
-        sendMessage("GetLobbyDataInternal")
+        SendMessage("UserLocation")
+        SendMessage("GetLobbyDataInternal")
         document.addEventListener("LobbyLeft",goToHomePage)
         return ()=>{
             document.removeEventListener("LobbyLeft",goToHomePage)
@@ -29,7 +27,7 @@
 
 {#if !inGame}
     <div class="min-w-fit max-w-[95%] w-[50rem] mx-auto">
-        <WaitingLobby sendMessage={sendMessage}/>
+        <WaitingLobby/>
     </div>
     <Footer/>
 {/if}
