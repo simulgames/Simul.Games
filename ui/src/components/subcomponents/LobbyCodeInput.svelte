@@ -1,8 +1,7 @@
 <script lang="ts">
-    import {type SendMessage} from "../../scripts/WebSocket";
+    import {SendMessage} from "../../scripts/WebSocket";
     import {onMount} from "svelte";
     import Input from "../style/Input.svelte";
-    export let sendMessage : SendMessage
 
     export let ValidLobbyCode : string
     let LobbyCode = ""
@@ -14,7 +13,7 @@
     function lobbyCodeInput(e) {
         LobbyCode = NumbersOnly(e.target.value).substring(0,6)
         if(LobbyCode.length == 6 && LobbyCode != QueriedLobbyCode){
-            sendMessage("GetLobbyDataExternal",{code:LobbyCode})
+            SendMessage("GetLobbyDataExternal",{code:LobbyCode})
             QueriedLobbyCode = LobbyCode
         }
         if(LobbyCode.length < 6){
