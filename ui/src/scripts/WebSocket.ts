@@ -2,8 +2,7 @@ import {LinearBackoff, TimeBuffer, WebsocketBuilder} from 'websocket-ts';
 import {getCookie, setCookie} from "typescript-cookie";
 import {APP_CONFIG} from "./Config"
 
-export function BuildWebSocket() : SendMessage{
-    let ws = new WebsocketBuilder(APP_CONFIG.WebSocketAddress)
+let builder = new WebsocketBuilder(APP_CONFIG.WebSocketAddress)
         .onOpen((i, ev) => {
             console.log("websocket open!",ev)
             let sessionIDCookie : string | undefined = getCookie("session_id")
@@ -38,12 +37,9 @@ export function BuildWebSocket() : SendMessage{
         })
         .withBackoff(new LinearBackoff(0,1000,10000))
         .onRetry((i, ev) => { console.log("retrying:",ev) })
-        .build();
-    return (Header, Body) => {
-        let msg =JSON.stringify({Header:Header,Body:Body})
-        console.log(msg)
-        ws.send(msg)
-    }
-}
 
-export type SendMessage = (Header:string, Body?:any) => void
+export const SendMessage = (Header:string, Body?:any) => {
+    let msg =JSON.stringify({Header:Header,Body:Body})
+    console.log(msg)
+    builder.build().send(msg)
+}
