@@ -59,7 +59,7 @@
 </script>
 
 <Header>
-    <IconButton icon="exit_to_app" OnClick={Exit}/>
+    <IconButton OnClick={Exit}>exit_to_app</IconButton>
 </Header>
 
 {#if !lobbyData["has-started"]}

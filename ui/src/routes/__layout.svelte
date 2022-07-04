@@ -14,6 +14,7 @@
 <script lang="ts">
     import {DarkMode} from "../scripts/DarkMode";
     import {onMount} from "svelte";
+    import "../app.css";
     onMount(()=>{
 
         function localStorageOverride() : boolean{
@@ -39,7 +40,5 @@
     })
 </script>
 
-<div>
-    <div class="absolute h-full w-full -z-10 top-0 bg-primary-100 dark:bg-zinc-900"></div>
-    <slot/>
-</div>
+<div class="absolute h-full w-full -z-10 top-0 bg-primary-100 dark:bg-zinc-900"></div>
+<slot/>
