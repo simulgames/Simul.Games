@@ -209,12 +209,14 @@
 {#if gameInfo != null && lobbyData.members != null}
     <ul class="flex mx-auto overflow-auto pb-3 whitespace-nowrap justify-center list-none">
         {#each lobbyData.members as member}
-        <li class="w-[6rem] md:w-[7rem] text-xs font-mono font-bold m-1">
-            <div class="w-full bg-white dark:bg-zinc-800 shadow-md rounded text-center p-2">
-                <span class="text-sm font-medium text-primary-500 dark:text-white">{member.name}</span>
-                <GameBoard TileBoard={tileBoard(member.id)} Class="gap-0.5" TileClass="small-tile"></GameBoard>
-            </div>
-        </li>
+            {#if member.id !== lobbyData["client-id"]}
+                <li class="w-[6rem] md:w-[7rem] text-xs font-mono font-bold m-1">
+                    <div class="w-full bg-white dark:bg-zinc-800 shadow-md rounded text-center p-2">
+                        <span class="text-sm font-medium text-primary-500 dark:text-white">{member.name}</span>
+                        <GameBoard TileBoard={tileBoard(member.id)} Class="gap-0.5" TileClass="small-tile"></GameBoard>
+                    </div>
+                </li>
+            {/if}
         {/each}
     </ul>
 
