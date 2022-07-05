@@ -9,7 +9,7 @@
     "@mui/material": "^5.8.6",
     "@types/jest": "^28.1.3",
     "@types/react": "^18.0.14",
-    "@types/react-dom": "^18.0.5",
+    "@types/react-dom": "^18.0.6",
     "@uiw/react-color-wheel": "^1.0.12",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
