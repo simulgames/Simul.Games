@@ -5,6 +5,9 @@
     import { SendMessage} from "../scripts/WebSocket";
     import Keyboard from "./subcomponents/Keyboard.svelte";
     import GameBoard from "./subcomponents/GameBoard.svelte";
+    import Paper from "./style/Paper.svelte";
+    import ToastContainer from "./subcomponents/ToastContainer.svelte";
+    import {toasts} from "../scripts/Toast";
 
     type result = any
     export type GameInfo = { Guesses : {id:[number[string]]},
@@ -121,7 +124,7 @@
         let msg = (e as CustomEvent).detail
         awaitingReply = false
         if(msg["status"] == "error"){
-            console.log("not a word!")
+            toasts.addToast(`${currentGuess[0] + currentGuess.toLowerCase().substring(1)} is not in our word list!`,2000)
             return
         }
         if(msg["status"] == "finished"){
@@ -210,11 +213,11 @@
     <ul class="flex mx-auto overflow-auto pb-3 whitespace-nowrap justify-center list-none">
         {#each lobbyData.members as member}
             {#if member.id !== lobbyData["client-id"]}
-                <li class="w-[6rem] md:w-[7rem] text-xs font-mono font-bold m-1">
-                    <div class="w-full bg-white dark:bg-zinc-800 shadow-md rounded text-center p-2">
+                <li class="w-[6rem] md:w-[7rem] text-xs font-mono font-bold m-1 text-center">
+                    <Paper Class="p-2">
                         <span class="text-sm font-medium text-primary-500 dark:text-white">{member.name}</span>
                         <GameBoard TileBoard={tileBoard(member.id)} Class="gap-0.5" TileClass="small-tile"></GameBoard>
-                    </div>
+                    </Paper>
                 </li>
             {/if}
         {/each}
@@ -229,3 +232,5 @@
         </div>
     </div>
 {/if}
+
+<ToastContainer/>
