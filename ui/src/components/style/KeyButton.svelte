@@ -11,11 +11,11 @@
     export let disabled = false
 </script>
 
-<button class="h-[3rem] border-2 bg-white rounded flex-grow
+<button class="h-[3rem] border-2 bg-white dark:bg-zinc-700 rounded flex-grow
         relative
         dark:border-zinc-800
         dark:text-white
-        {disabled ? 'dark:bg-zinc-800 dark:text-zinc-400 bg-gray-400 text-white' : 'bg-zinc-700 dark:hover:bg-zinc-600 border-slate-300 shadow-md hover:bg-slate-100 hover:border-slate-500'}
+        {disabled ? 'dark:bg-zinc-800 dark:text-zinc-400 bg-gray-400 text-white' : ' dark:hover:bg-zinc-600 border-slate-300 shadow-md hover:bg-slate-100 hover:border-slate-500'}
         {Class}"
         on:click={pressKey}
     >

@@ -4,7 +4,7 @@
     export let text = ''
 </script>
 
-<div class="m-2 shadow-xl" in:scale out:fade>
+<div class="m-2 shadow-xl w-fit mx-auto" in:scale out:fade>
     <Paper>
         <span class="p-3 text-2xl">{text}</span>
     </Paper>
