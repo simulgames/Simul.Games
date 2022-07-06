@@ -168,6 +168,16 @@
         if(guess != undefined){
             UpdateGuess(id,msg["guess"],turn)
         }
+
+        let status = msg["status"]
+        if(gameInfo.HasClientFinished && status == "finished"){
+            SendMessage("IsGameFinished")
+        }
+    }
+
+    function UpdateIsGameFinished(e:Event){
+        let msg = (e as CustomEvent).detail
+        gameInfo.HasFinished = (msg["finished"] === true)
     }
 
     onMount(()=>{
@@ -175,11 +185,13 @@
         document.addEventListener("GameInfo",setGameInfo)
         document.addEventListener("CompareResultClient",CompareResultClient)
         document.addEventListener("CompareResultOther",CompareResultOther)
+        document.addEventListener("IsGameFinished",UpdateIsGameFinished)
         document.addEventListener("keydown",keyUp)
         return ()=>{
             document.removeEventListener("GameInfo",setGameInfo)
             document.removeEventListener("CompareResultClient",CompareResultClient)
             document.removeEventListener("CompareResultOther",CompareResultOther)
+            document.removeEventListener("IsGameFinished",UpdateIsGameFinished)
             document.removeEventListener("keydown",keyUp)
         }
     })
@@ -236,10 +248,10 @@
 <link rel="stylesheet" href="src/components/style/word-duel.css" />
 
 {#if gameInfo != null && lobbyData.members != null}
-    <ul class="flex mx-auto overflow-auto pb-3 whitespace-nowrap justify-center list-none">
+    <ul class="flex mx-auto overflow-x-scroll pb-0.5 mb-2.5 whitespace-nowrap justify-center list-none">
         {#each lobbyData.members as member}
             {#if member.id !== lobbyData["client-id"]}
-                <li class="w-[6rem] md:w-[7rem] text-xs font-mono font-bold m-1 text-center">
+                <li class="min-w-[6rem] md:min-w-[7rem] text-xs font-mono font-bold m-1 text-center">
                     <Paper Class="p-2">
                         <span class="text-sm font-medium text-primary-500 dark:text-white">{member.name}</span>
                         <GameBoard TileBoard={tileBoard(member.id)} Class="gap-0.5" TileClass="small-tile"></GameBoard>
