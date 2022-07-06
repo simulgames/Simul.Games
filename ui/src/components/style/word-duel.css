@@ -40,10 +40,10 @@
 
 @keyframes celebrate {
     25% {
-        transform: translateY(5px);
+        transform: translateY(5%);
     }
     50% {
-        transform: translateY(-5px);
+        transform: translateY(-5%);
     }
 }
 
