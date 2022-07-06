@@ -65,6 +65,8 @@
             if(guessIsRightLength){
                 SendMessage("SubmitWord",{guess:currentGuess})
                 awaitingReply = true
+            } else {
+                toasts.addToast("Not enough letters")
             }
             return;
         }
@@ -124,7 +126,7 @@
         let msg = (e as CustomEvent).detail
         awaitingReply = false
         if(msg["status"] == "error"){
-            toasts.addToast(`${currentGuess[0] + currentGuess.toLowerCase().substring(1)} is not in our word list!`,2000)
+            toasts.addToast(`${currentGuess[0] + currentGuess.toLowerCase().substring(1)} is not in our word list!`)
             return
         }
         if(msg["status"] == "finished"){

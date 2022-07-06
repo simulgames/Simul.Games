@@ -13,7 +13,7 @@ function createToasts() {
 
     return {
         subscribe,
-        addToast: (text:string,duration:number) => update(
+        addToast: (text:string,duration:number=2000) => update(
             (toast)=>{
                 let newToast = {...toast}
                 let id = v4()
