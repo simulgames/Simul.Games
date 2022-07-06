@@ -1,0 +1,52 @@
+
+@keyframes flip {
+    from {
+        transform: rotateX(180deg);
+    }
+}
+@keyframes result-color {
+    to{
+        color: var(--color-to-transition-to);
+        background-color: var(--bg-color-to-transition-to);
+    }
+}
+
+.tile-with-result{
+    animation: result-color 0.4s forwards steps(1), flip 0.45s;
+    --color-to-transition-to: white;
+}
+
+.key-with-result{
+    animation: result-color 0.4s forwards steps(1);
+    --color-to-transition-to: white;
+}
+
+.no-letter{
+    --bg-color-to-transition-to: #787c7e;
+}
+
+.has-letter {
+    --bg-color-to-transition-to: #c9b458;
+}
+
+.has-letter-at-space {
+    --bg-color-to-transition-to: #6aaa64;
+}
+
+.small-tile{
+    background-color: #cbced1;
+    color: #cbced1;
+}
+
+@keyframes celebrate {
+    25% {
+        transform: translateY(5%);
+    }
+    50% {
+        transform: translateY(-5%);
+    }
+}
+
+.celebrate{
+    animation: celebrate 1s;
+}

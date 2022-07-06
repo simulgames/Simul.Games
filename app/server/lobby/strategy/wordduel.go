@@ -61,7 +61,7 @@ func (w wordDuel) GetGameInfo(client message.Node) gameInfo {
 			guesses[w.members.GetID(user)] = results.Guesses
 		}
 	} else {
-		guesses[w.members.GetID(client)] = append(clientResult.Guesses, "")
+		guesses[w.members.GetID(client)] = clientResult.Guesses
 	}
 	for id, results := range w.results {
 		others[w.members.GetID(id)] = results.Results
@@ -103,6 +103,7 @@ func (w wordDuel) Handle(msg message.Message) {
 			user.In() <- reply.InvalidSyntaxReply()
 			break
 		}
+		w.members.Send(reply.GameStarting())
 		WordDuelFactory{}.MakeStrategy(w.members, w.strategySetter)
 	case header.IsGameFinished:
 		user.In() <- reply.IsGameFinished(w.hasFinished())
