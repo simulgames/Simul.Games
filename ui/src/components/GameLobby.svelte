@@ -8,6 +8,7 @@
     import Paper from "./style/Paper.svelte";
     import ToastContainer from "./subcomponents/ToastContainer.svelte";
     import {toasts} from "../scripts/Toast";
+    import NextGameFooter from "./subcomponents/NextGameFooter.svelte";
 
     type result = any
     export type GameInfo = { Guesses : {id:[number[string]]},
@@ -122,7 +123,7 @@
 
     function ResultAnimationLength(result:string) : number {
         let parsedResult : [string] = parseResults(result)
-        return parsedResult.length * animationTimePerResult
+        return parsedResult.length * animationTimePerResult + animationTimePerResult
     }
 
     function UpdateGuess(id:string,guess:string,turn:number){
@@ -151,6 +152,7 @@
         if(msg["status"] == "finished"){
             setTimeout( () => {
                 SendMessage("GameInfo")
+                SendMessage("IsGameFinished")
                 }, ResultAnimationLength(msg["result"])
             )
         }
@@ -180,6 +182,11 @@
         gameInfo.HasFinished = (msg["finished"] === true)
     }
 
+    function gameStarting(){
+        toasts.addToast("A new game has started!",4000)
+        SendMessage("GameInfo")
+    }
+
     onMount(()=>{
         SendMessage("GameInfo")
         document.addEventListener("GameInfo",setGameInfo)
@@ -187,12 +194,14 @@
         document.addEventListener("CompareResultOther",CompareResultOther)
         document.addEventListener("IsGameFinished",UpdateIsGameFinished)
         document.addEventListener("keydown",keyUp)
+        document.addEventListener("GameStarting",gameStarting)
         return ()=>{
             document.removeEventListener("GameInfo",setGameInfo)
             document.removeEventListener("CompareResultClient",CompareResultClient)
             document.removeEventListener("CompareResultOther",CompareResultOther)
             document.removeEventListener("IsGameFinished",UpdateIsGameFinished)
             document.removeEventListener("keydown",keyUp)
+            document.removeEventListener("GameStarting",gameStarting)
         }
     })
 
@@ -276,6 +285,9 @@
             <Keyboard isEnterDisabled={!guessIsRightLength} KeyBoardClasses={KeyBoardClasses()}/>
         </div>
     </div>
+    {#if gameInfo.HasFinished}
+       <NextGameFooter isHost={lobbyData["client-id"] === lobbyData.lobby["host-id"]}/>
+    {/if}
 {/if}
 
 <ToastContainer/>

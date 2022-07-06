@@ -103,6 +103,7 @@ func (w wordDuel) Handle(msg message.Message) {
 			user.In() <- reply.InvalidSyntaxReply()
 			break
 		}
+		w.members.Send(reply.GameStarting())
 		WordDuelFactory{}.MakeStrategy(w.members, w.strategySetter)
 	case header.IsGameFinished:
 		user.In() <- reply.IsGameFinished(w.hasFinished())
