@@ -11,7 +11,7 @@
     export let disabled = false
 </script>
 
-<button class="h-[3rem] border-2 bg-white dark:bg-zinc-700 rounded flex-grow
+<button class="h-[3rem] border-2 bg-white dark:bg-zinc-700 text-primary-700 rounded flex-grow
         relative
         dark:border-zinc-800
         dark:text-white

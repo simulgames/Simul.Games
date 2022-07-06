@@ -221,7 +221,7 @@
                 let tile = {letter,style}
                 row.push(tile)
             }
-            if(gameInfo.Successful && (turn+1) == results.length){
+            if(id == lobbyData["client-id"] && gameInfo.Successful && (turn+1) == results.length){
                 rowStyle.class = "celebrate"
                 rowStyle.delay = 100
             }
