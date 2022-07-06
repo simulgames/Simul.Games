@@ -245,10 +245,16 @@
 </script>
 
 
+<style>
+    .justify-center-safe{
+        justify-content: safe center;
+    }
+</style>
+
 <link rel="stylesheet" href="src/components/style/word-duel.css" />
 
 {#if gameInfo != null && lobbyData.members != null}
-    <ul class="flex mx-auto overflow-x-scroll pb-0.5 mb-2.5 whitespace-nowrap justify-center list-none">
+    <ul class="flex mx-auto overflow-x-scroll pb-0.5 mb-2.5 whitespace-nowrap list-none justify-center-safe select-none">
         {#each lobbyData.members as member}
             {#if member.id !== lobbyData["client-id"]}
                 <li class="min-w-[6rem] md:min-w-[7rem] text-xs font-mono font-bold m-1 text-center">
