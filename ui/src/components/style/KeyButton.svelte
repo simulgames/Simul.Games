@@ -15,7 +15,7 @@
         relative
         dark:border-zinc-800
         dark:text-white
-        {disabled ? 'dark:bg-zinc-800 dark:text-zinc-400 bg-gray-400 text-white' : ' dark:hover:bg-zinc-600 border-slate-300 shadow-md hover:bg-slate-100 hover:border-slate-500'}
+        {disabled ? 'dark:enabled:bg-zinc-800 dark:enabled:border-zinc-900 dark:text-zinc-400 bg-gray-400 text-white' : ' dark:hover:bg-zinc-600 border-slate-300 shadow-md hover:bg-slate-100 hover:border-slate-500'}
         {Class}"
         on:click={pressKey}
     >
