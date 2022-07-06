@@ -9,8 +9,12 @@
     import {type LobbyData} from "../types/LobbyData"
     import GameLobby from "../components/GameLobby.svelte";
     import IconButton from "../components/style/IconButton.svelte";
+    import {replaceStateWithQuery} from "../scripts/ReplaceStateWithQuery";
     function goToHomePage(){
         goto("/")
+    }
+    function addLobbyParam(id:string){
+        replaceStateWithQuery({id:id})
     }
     function gameStarted(){
         lobbyData["has-started"] = true
@@ -45,6 +49,7 @@
     let loadedData : boolean = false
     function OnGetLobbyData(e:Event){
         lobbyData = (e as CustomEvent).detail
+        addLobbyParam(lobbyData.lobby.id)
         loadedData = true
     }
     function OnMemberJoined(){
