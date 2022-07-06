@@ -28,7 +28,7 @@
         {#each thirdRow as key}
             <KeyButton key={key} Class={KeyBoardClasses[key]}/>
         {/each}
-        <KeyButton icon="keyboard_return" key="Enter" disabled={isEnterDisabled} Class="flex-grow-[1.50] enabled:bg-blue-600 enabled:text-white"/>
+        <KeyButton icon="keyboard_return" key="Enter" disabled={isEnterDisabled} Class="flex-grow-[1.50] enabled:bg-blue-600 dark:enabled:bg-blue-700 enabled:hover:bg-blue-500 dark:enabled:hover:bg-blue-600 enabled:text-white"/>
         <div class="flex-grow-[0.75]"></div>
     </div>
 </div>
