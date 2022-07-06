@@ -225,7 +225,7 @@
         let tileBoard : [{row:[{letter:string,style:string}],rowStyle: { class:string,delay:number }}] = []
         for(let turn = 0; turn<height; turn++){
             let row = []
-            let rowStyle : { class:string,delay:number } = {}
+            let rowStyle : { class:string,delay:number } = null
             for(let i = 0; i<width; i++){
                 let letter = getLetter(turn,i,id)
                 let result = results[turn] ? results[turn][i] : null
@@ -234,6 +234,7 @@
                 row.push(tile)
             }
             if(id == lobbyData["client-id"] && gameInfo.Successful && (turn+1) == results.length){
+                rowStyle = {}
                 rowStyle.class = "celebrate"
                 rowStyle.delay = 100
             }
