@@ -37,3 +37,16 @@
     background-color: #cbced1;
     color: #cbced1;
 }
+
+@keyframes celebrate {
+    25% {
+        transform: translateY(5px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.celebrate{
+    animation: celebrate 1s;
+}

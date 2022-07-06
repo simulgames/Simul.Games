@@ -21,11 +21,14 @@
     let gameInfo : GameInfo = null
     function setGameInfo(e:Event){
         gameInfo = (e as CustomEvent).detail
+        if(gameInfo.HasClientFinished){
+            toasts.addToast(`The word was ${gameInfo.Word}`)
+        }
         console.log(gameInfo)
     }
 
     $ : KeyBoardClasses = () => {
-        let keyboardResults : {id:number} = {}
+        let keyboardResults : {letter:number} = {}
         let guesses : [string] = gameInfo ? gameInfo.Guesses[lobbyData["client-id"]] : []
         let results : [[number]] = gameInfo ? gameInfo.Results[lobbyData["client-id"]] : [[]]
         for(let turn = 0; turn< results.length;turn++){
@@ -33,7 +36,7 @@
             let result : [number] = results[turn]
             for(let i = 0;i<result.length;i++){
                 let letter : string = guess[i]
-                if(keyboardResults[letter] && result[i] < keyboardResults[i]) {
+                if(keyboardResults[letter] && result[i] < keyboardResults[letter]) {
                     continue
                 }
                 keyboardResults[letter] = result[i]
@@ -96,9 +99,14 @@
         return (/[A-Z]/).test(char)
     }
 
+    const animationTimePerResult = 500
+
+    function parseResults(result:string) : [string]{
+        return result.slice(1,-1).split(" ")
+    }
 
     function CompareResult(id:string,result:string,turn:number){
-        let parsedResult : [string] = result.slice(1,-1).split(" ")
+        let parsedResult : [string] = parseResults(result)
         let currentResults : [[number]] = gameInfo.Results[id] ? gameInfo.Results[id] : [[]]
         let updatedResults : [[number]] = [...currentResults]
         updatedResults.push([])
@@ -110,6 +118,11 @@
                 gameInfo.Results[id] = [...updatedResults]
             },i*500)
         }
+    }
+
+    function ResultAnimationLength(result:string) : number {
+        let parsedResult : [string] = parseResults(result)
+        return parsedResult.length * animationTimePerResult
     }
 
     function UpdateGuess(id:string,guess:string,turn:number){
@@ -129,14 +142,18 @@
             toasts.addToast(`${currentGuess[0] + currentGuess.toLowerCase().substring(1)} is not in our word list!`)
             return
         }
-        if(msg["status"] == "finished"){
-            SendMessage("GameInfo")
-        }
 
         let turn : number = msg["turn"]
         let clientID = lobbyData["client-id"]
         UpdateGuess(clientID,msg["guess"],turn)
         CompareResult(clientID,msg["result"],turn)
+
+        if(msg["status"] == "finished"){
+            setTimeout( () => {
+                SendMessage("GameInfo")
+                }, ResultAnimationLength(msg["result"])
+            )
+        }
 
         currentGuess = ""
     }
@@ -188,21 +205,28 @@
         return ""
     }
 
-    $: tileBoard = (id:string) : [[{letter:string,style:string}]] => {
+    $: tileBoard = (id:string) : [{row:[{letter:string,style:string}],rowStyle: { class:string,delay:number }}] => {
         if(id == null){
-            return [[{letter:'err',style:'err'}]]
+            return [{row:[{letter:'err',style:'err'}],rowStyle:{class:'err',delay:0}}]
         }
         let results = gameInfo.Results[id] ? gameInfo.Results[id] : []
-        let tileBoard : [[{letter:string,style:string}]] = []
+        let tileBoard : [{row:[{letter:string,style:string}],rowStyle: { class:string,delay:number }}] = []
         for(let turn = 0; turn<height; turn++){
-            tileBoard.push([])
+            let row = []
+            let rowStyle : { class:string,delay:number } = {}
             for(let i = 0; i<width; i++){
                 let letter = getLetter(turn,i,id)
                 let result = results[turn] ? results[turn][i] : null
                 let style = getStyle("tile-with-result",result)
                 let tile = {letter,style}
-                tileBoard[turn].push(tile)
+                row.push(tile)
             }
+            if(gameInfo.Successful && (turn+1) == results.length){
+                rowStyle.class = "celebrate"
+                rowStyle.delay = 100
+            }
+            let styledRow : {row:[{letter:string,style:string}],rowStyle:{ class:string,delay:number }} = {row:row,rowStyle:rowStyle}
+            tileBoard.push(styledRow)
         }
         return tileBoard
     }
