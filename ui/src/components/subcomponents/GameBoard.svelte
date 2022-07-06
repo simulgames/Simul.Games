@@ -1,7 +1,7 @@
 <script lang="ts">
     import Tile from "../style/Tile.svelte";
     export let Class : string = ""
-    export let TileBoard : [[{letter:string,style:string}]]
+    export let TileBoard : [{row:[{letter:string,style:string}],rowStyle: { class:string,delay:number }}]
     export let TileClass : string = ""
 </script>
 
@@ -13,8 +13,10 @@
 
 <div class="grid-column grid {Class}">
     {#each TileBoard as turn}
-        {#each turn as tile}
-            <Tile character={tile.letter} style={tile.style + " " + TileClass}/>
+        {#each turn.row as tile, i}
+            <div class={turn.rowStyle.class} style={`animation-delay: ${turn.rowStyle.delay*i}ms`}>
+                <Tile character={tile.letter} Class={tile.style + " " + TileClass}/>
+            </div>
         {/each}
     {/each}
 </div>
