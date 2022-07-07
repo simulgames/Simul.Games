@@ -10,8 +10,16 @@ const config = {
 	}),
 
 	kit: {
-		adapter: adapter({ platform: 'node' }),
+		adapter: adapter(),
+		routes: filepath => {
+			return ![
+				// exclude *test.js files
+				/\.test\.ts$/,
 
+				// original default config
+				/(?:(?:^_|\/_)|(?:^\.|\/\.)(?!well-known))/,
+			].some(regex => regex.test(filepath))
+		},
 		vite: {
 			test: {
 				environment: "jsdom",
