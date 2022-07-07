@@ -2,7 +2,7 @@ FROM golang:alpine AS builder
 WORKDIR /simulgames
 COPY dictionary dictionary
 WORKDIR /simulgames/app
-COPY app .
+COPY server .
 RUN go build
 
 FROM alpine:latest

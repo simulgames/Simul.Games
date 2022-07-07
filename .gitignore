@@ -4,16 +4,16 @@ config.yaml
 build/
 
 # ui
-ui/node_modules
-ui/build
-ui/coverage
-ui/.env
-ui/.env.*
-ui/.svelte-kit
-ui/.DS_Store
-ui/package
-ui/coverage
+webclient/node_modules
+webclient/build
+webclient/coverage
+webclient/.env
+webclient/.env.*
+webclient/.svelte-kit
+webclient/.DS_Store
+webclient/package
+webclient/coverage
 
 # app
-app/simul-app
-app/coverage.out
+server/simul-app
+server/coverage.out
