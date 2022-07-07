@@ -9,6 +9,7 @@
     import ToastContainer from "./subcomponents/ToastContainer.svelte";
     import {toasts} from "../scripts/Toast";
     import NextGameFooter from "./subcomponents/NextGameFooter.svelte";
+    import './style/word-duel.css'
 
     type result = any
     export type GameInfo = { Guesses : {id:[number[string]]},
@@ -260,8 +261,6 @@
         justify-content: safe center;
     }
 </style>
-
-<link rel="stylesheet" href="src/components/style/word-duel.css" />
 
 {#if gameInfo != null && lobbyData.members != null}
     <ul class="flex mx-auto overflow-x-scroll pb-0.5 mb-2.5 whitespace-nowrap list-none justify-center-safe select-none">
