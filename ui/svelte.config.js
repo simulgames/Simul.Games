@@ -20,13 +20,6 @@ const config = {
 				/(?:(?:^_|\/_)|(?:^\.|\/\.)(?!well-known))/,
 			].some(regex => regex.test(filepath))
 		},
-		vite: {
-			test: {
-				environment: "jsdom",
-				globals: true, // required or setupTests will say expect is undefined -- however, discouraged
-				setupFiles: "src/setupTests.ts"
-			},
-		},
 	}
 }
 
