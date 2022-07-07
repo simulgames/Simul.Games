@@ -2,7 +2,7 @@
 	"name": "simul.games",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "./make_dotenv.sh && vite dev -o -p $(dotenv -p PORT)",
+		"dev": "./make_dotenv.sh && vite dev --open --port $(dotenv -p PORT)",
 		"build": "vite build",
 		"package": "vite package",
 		"preview": "vite preview",
