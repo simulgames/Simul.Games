@@ -13,17 +13,17 @@ requires: go & npm. By default, will open ports 3000 & 8080 on localhost; you ca
 for changes to be shown.
 
 ```shell
-cd ui && npm run start      # start webclient using port defined in config.yaml
+cd webclient && npm run dev      # start webclient using port defined in config.yaml
 ```
 ```shell
-cd ui && npm test           # run webclient tests
+cd webclient && npm test           # run webclient tests
 ```
 
 ```shell
-cd app && go run main.go    # start backend using port defined in config.yaml
+cd server && go run main.go    # start backend using port defined in config.yaml
 ```
 ```shell
-cd app && go test ./... -coverpkg=./... -timeout 100ms -race # run go tests
+cd server && go test ./... -coverpkg=./... -timeout 100ms -race # run go tests
 ```
 
 ## License
