@@ -1,5 +1,5 @@
 import {describe,it} from "vitest";
-import {cleanup, render, getByLabelText, fireEvent, getByTitle} from "@testing-library/svelte"
+import {cleanup, render, getByLabelText, fireEvent} from "@testing-library/svelte"
 
 import UsernameInput from "./UsernameInput.svelte"
 
