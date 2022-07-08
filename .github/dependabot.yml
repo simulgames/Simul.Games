@@ -1,11 +1,11 @@
 version: 2
 updates:
-  # Maintain dependencies for UI
+  # Maintain dependencies for Webclient
   - package-ecosystem: "npm"
     directory: "/webclient"
     schedule:
       interval: "daily"
-  # Maintain dependencies for App
+  # Maintain dependencies for Server
   - package-ecosystem: "gomod" 
     directory: "/server"
     schedule:
