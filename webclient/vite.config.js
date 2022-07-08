@@ -12,6 +12,9 @@ export default {
         environment: "jsdom",
         // in-source testing
         includeSource: ["src/**/*.{js,ts,svelte}"],
+        coverage:{
+            reporter:["json"]
+        },
         deps: {
             // Put Svelte component here, e.g., inline: [/svelte-multiselect/, /msw/]
             inline: [],
