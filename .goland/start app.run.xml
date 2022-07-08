@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="start app" type="GoApplicationRunConfiguration" factoryName="Go Application">
     <module name="simul.games" />
-    <working_directory value="$PROJECT_DIR$/app" />
+    <working_directory value="$PROJECT_DIR$/server" />
     <kind value="DIRECTORY" />
     <package value="simul.games" />
-    <directory value="$PROJECT_DIR$/app" />
+    <directory value="$PROJECT_DIR$/server" />
     <filePath value="$PROJECT_DIR$" />
     <method v="2" />
   </configuration>
