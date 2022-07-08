@@ -1,4 +1,4 @@
-import { describe, it } from "vitest"
+import { describe, it, vi } from "vitest"
 import {
     cleanup,
     render,
@@ -6,22 +6,19 @@ import {
     fireEvent,
     getByTitle,
 } from "@testing-library/svelte"
-import type { SendMessage } from "src/scripts/WebSocket"
+
+import "../../scripts/WebSocket"
 
 import LobbyCodeInput from "./LobbyCodeInput.svelte"
-import { MockSendMessage } from "../../setupTests"
-
-let lastMessageSent: any
-const sendMessage: SendMessage = (header, body) => {
-    lastMessageSent = { Header: header, Body: body }
-}
+import { MockMessageReceivedFromServer } from "../../setupTests"
+import * as WebSocket from "../../scripts/WebSocket"
+const SendMessageSpy = vi.spyOn(WebSocket, "SendMessage")
 
 function getFreshContainer(): HTMLElement {
     cleanup()
-    lastMessageSent = undefined
+    vi.restoreAllMocks()
     const { container } = render(LobbyCodeInput, {
         ValidLobbyCode: "",
-        sendMessage: sendMessage,
     })
     return container
 }
@@ -50,7 +47,6 @@ describe("Lobby Code Input", () => {
         it("Is empty without user input", () => {
             let lobbyCodeInput = getLobbyCodeInputElement()
             expect(lobbyCodeInput).toHaveTextContent("")
-            expect(lastMessageSent).not.toBeDefined()
         })
 
         it("Does not accept non numeric inputs", async () => {
@@ -71,10 +67,14 @@ describe("Lobby Code Input", () => {
 
         it("Will send a message upon receiving a valid 6 digit code", async () => {
             let lobbyCodeInput = getLobbyCodeInputElement()
+            let dummyCode = "123456"
             await fireEvent.input(lobbyCodeInput, {
-                target: { value: "123456" },
+                target: { value: dummyCode },
             })
-            expect(lastMessageSent.Body["code"]).toBe("123456")
+            expect(SendMessageSpy).toHaveBeenCalledWith(
+                "GetLobbyDataExternal",
+                { code: dummyCode }
+            )
         })
     })
 
@@ -89,7 +89,7 @@ describe("Lobby Code Input", () => {
         })
         it("Gives Error when Invalid Lobby", async () => {
             let container = getFreshContainer()
-            await MockSendMessage("LobbyNotFound")
+            await MockMessageReceivedFromServer("LobbyNotFound")
             let helperText = getByTitle(container, "helper text")
             expect(helperText).toHaveTextContent("Lobby Not Found!")
         })
@@ -105,7 +105,7 @@ describe("Lobby Code Input", () => {
                 target: { value: lobbyCode },
             })
             let status = "hello, world!"
-            await MockSendMessage("LobbyFound", {
+            await MockMessageReceivedFromServer("LobbyFound", {
                 lobby: lobbyCode,
                 status: status,
             })
