@@ -3,7 +3,7 @@
 config.yaml
 build/
 
-# ui
+# webclient
 webclient/node_modules
 webclient/build
 webclient/coverage
@@ -12,8 +12,7 @@ webclient/.env.*
 webclient/.svelte-kit
 webclient/.DS_Store
 webclient/package
-webclient/coverage
 
-# app
+# server
 server/simul-app
 server/coverage.out
