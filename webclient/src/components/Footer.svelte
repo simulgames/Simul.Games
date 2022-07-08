@@ -1,15 +1,18 @@
-<div class="flex min-w-full fixed bottom-0">
-    <footer class="flex-auto text-center text-sm bg-primary-500 dark:bg-gray-800 text-white">
-        <a href="https://github.com/simulgames/Simul.Games" class="hover:underline">
-            <span class="material-icon">
-                github
-            </span>
+<div class="fixed bottom-0 flex min-w-full">
+    <footer
+        class="flex-auto bg-primary-500 text-center text-sm text-white dark:bg-gray-800">
+        <a
+            href="https://github.com/simulgames/Simul.Games"
+            class="hover:underline">
+            <span class="material-icon"> github </span>
         </a>
-        <br/>
+        <br />
         Copyright © 2022 simul.games.
-        <br/>
+        <br />
         <span class="text-xs">
-            <a class="inline-block align-baseline hover:underline text-white" href="tos">
+            <a
+                class="inline-block align-baseline text-white hover:underline"
+                href="tos">
                 Terms of Service
             </a>
         </span>

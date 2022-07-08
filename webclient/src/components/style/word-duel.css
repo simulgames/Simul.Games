@@ -4,23 +4,23 @@
     }
 }
 @keyframes result-color {
-    to{
+    to {
         color: var(--color-to-transition-to);
         background-color: var(--bg-color-to-transition-to);
     }
 }
 
-.tile-with-result{
+.tile-with-result {
     animation: result-color 0.4s forwards steps(1), flip 0.45s;
     --color-to-transition-to: white;
 }
 
-.key-with-result{
+.key-with-result {
     animation: result-color 0.4s forwards steps(1);
     --color-to-transition-to: white;
 }
 
-.no-letter{
+.no-letter {
     --bg-color-to-transition-to: #787c7e;
 }
 
@@ -32,7 +32,7 @@
     --bg-color-to-transition-to: #6aaa64;
 }
 
-.small-tile{
+.small-tile {
     background-color: #cbced1;
     color: #cbced1;
 }
@@ -46,6 +46,6 @@
     }
 }
 
-.celebrate{
+.celebrate {
     animation: celebrate 1s;
 }
