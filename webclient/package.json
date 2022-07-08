@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "scripts": {
         "dev": "./make_dotenv.sh && vite dev --open --port $(dotenv -p PORT)",
-        "build": "vite build",
+        "build": "./make_dotenv.sh && vite build",
         "preview": "vite preview",
         "check": "svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
