@@ -1,11 +1,12 @@
 <script lang="ts">
-    import DarkModeIcon from "./subcomponents/DarkModeIcon.svelte";
+    import DarkModeIcon from "./subcomponents/DarkModeIcon.svelte"
 </script>
 
-<div class="py-2 mb-2 font-mono font-bold italic text-xl px-[5%] lg:px-10 shadow-lg bg-primary-800 flex justify-between select-none">
+<div
+    class="mb-2 flex select-none justify-between bg-primary-800 py-2 px-[5%] font-mono text-xl font-bold italic shadow-lg lg:px-10">
     <a href="/"><h5 class="text-primary-50">simul.games</h5></a>
     <div>
-        <DarkModeIcon/>
-        <slot/>
+        <DarkModeIcon />
+        <slot />
     </div>
 </div>
