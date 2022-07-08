@@ -1,11 +1,12 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="start app" type="GoApplicationRunConfiguration" factoryName="Go Application">
+  <configuration default="false" name="test server" type="GoTestRunConfiguration" factoryName="Go Test">
     <module name="simul.games" />
     <working_directory value="$PROJECT_DIR$/server" />
+    <go_parameters value="-coverpkg=./... -timeout 100ms -race" />
     <kind value="DIRECTORY" />
-    <package value="simul.games" />
     <directory value="$PROJECT_DIR$/server" />
     <filePath value="$PROJECT_DIR$" />
+    <framework value="gotest" />
     <method v="2" />
   </configuration>
 </component>

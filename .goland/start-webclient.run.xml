@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="start ui" type="js.build_tools.npm">
+  <configuration default="false" name="start webclient" type="js.build_tools.npm">
     <package-json value="$PROJECT_DIR$/webclient/package.json" />
     <command value="run" />
     <scripts>
