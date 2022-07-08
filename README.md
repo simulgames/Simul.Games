@@ -1,4 +1,6 @@
 # [Simul.Games](https://simul.games)
+___
+[![codecov](https://codecov.io/gh/simulgames/Simul.Games/branch/main/graph/badge.svg?token=2PZI6ULFEG)](https://codecov.io/gh/simulgames/Simul.Games)
 
 Simul Games is a free online party game server focused on realtime, varied, gameplay and ease of use across all devices.
 
