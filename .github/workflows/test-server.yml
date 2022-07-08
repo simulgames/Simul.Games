@@ -17,21 +17,11 @@ jobs:
           go-version: 1.18
 
       - name: Build
-        run: cd app && go build -v ./...
+        run: cd server && go build -v ./...
 
       - name: Test
         id: test
         run: |
-          cd app
+          cd server
           go test -coverprofile=coverage.out ./... -coverpkg=./... -timeout 100ms -race
-#          OUTPUT=$(go tool cover -func=coverage.out | tail -1)
-#          echo "::set-output name=result::$OUTPUT"
-
-      #- uses: marocchino/sticky-pull-request-comment@v2
-      #  with:
-      #    recreate: true
-      #    message: |
-      #      ```
-      #      ${{ steps.test.outputs.result }}
-
       - uses: codecov/codecov-action@v3
