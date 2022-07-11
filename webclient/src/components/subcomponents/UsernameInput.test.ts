@@ -16,13 +16,15 @@ function getFreshUserNameInput(): HTMLInputElement {
 
 describe("Username Input", () => {
     it("Renders", () => {
-        let usernameInput = getFreshUserNameInput()
+        const usernameInput = getFreshUserNameInput()
         expect(usernameInput).toBeDefined()
     })
     it("Has a Max Length of 10", async () => {
-        let usernameInput = getFreshUserNameInput()
+        const usernameInput = getFreshUserNameInput()
         await fireEvent.input(usernameInput, {
-            target: { value: "abcdefghijklmnopqrstuvwxyz" },
+            target: {
+                value: "A large username input will be capped at a max length of ten",
+            },
         })
         expect(usernameInput.value.length).toBe(10)
     })

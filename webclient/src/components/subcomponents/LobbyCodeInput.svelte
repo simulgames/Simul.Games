@@ -60,7 +60,7 @@
 
 <Input
     Label="Lobby Code"
-    ID="lobbycode"
+    ID="lobby-code"
     bind:Value={LobbyCode}
     OnInput={lobbyCodeInput}
     HelperText={LobbyHelperText}

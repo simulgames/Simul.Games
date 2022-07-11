@@ -3,9 +3,9 @@ import { act } from "@testing-library/svelte"
 
 export async function MockMessageReceivedFromServer(
     header: string,
-    body?: any
+    body?: Record<string, unknown>
 ) {
-    let invalidLobbyEvent = new CustomEvent(header, {
+    const invalidLobbyEvent = new CustomEvent(header, {
         bubbles: true,
         cancelable: false,
         composed: true,

@@ -51,7 +51,7 @@
         lobby: { id: "", "host-id": "", name: "" },
         members: [{ id: "", color: "", name: "" }],
     }
-    let loadedData: boolean = false
+    let loadedData = false
     function OnGetLobbyData(e: Event) {
         lobbyData = (e as CustomEvent).detail
         addLobbyParam(lobbyData.lobby.id)

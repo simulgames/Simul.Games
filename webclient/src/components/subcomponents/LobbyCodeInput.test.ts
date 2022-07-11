@@ -24,33 +24,33 @@ function getFreshContainer(): HTMLElement {
 }
 
 function getLobbyCodeInputElement(): HTMLInputElement {
-    let container = getFreshContainer()
+    const container = getFreshContainer()
     return getByLabelText(container, "Lobby Code") as HTMLInputElement
 }
 
 function getLobbyCodeHelperText(): HTMLElement {
-    let container = getFreshContainer()
+    const container = getFreshContainer()
     return getByTitle(container, "helper text")
 }
 
 describe("Lobby Code Input", () => {
     describe("Lobby Code Input Behaviour", () => {
         it("Renders", () => {
-            let lobbyCodeInput = getLobbyCodeInputElement()
+            const lobbyCodeInput = getLobbyCodeInputElement()
             expect(lobbyCodeInput).toBeDefined()
         })
         it("Has a placeholder value of LOBBY CODE", () => {
-            let lobbyCodeInput = getLobbyCodeInputElement()
+            const lobbyCodeInput = getLobbyCodeInputElement()
             expect(lobbyCodeInput.placeholder).toBe("LOBBY CODE")
         })
 
         it("Is empty without user input", () => {
-            let lobbyCodeInput = getLobbyCodeInputElement()
+            const lobbyCodeInput = getLobbyCodeInputElement()
             expect(lobbyCodeInput).toHaveTextContent("")
         })
 
         it("Does not accept non numeric inputs", async () => {
-            let lobbyCodeInput = getLobbyCodeInputElement()
+            const lobbyCodeInput = getLobbyCodeInputElement()
             await fireEvent.input(lobbyCodeInput, {
                 target: { value: "h3ll0 w0r1d" },
             })
@@ -58,7 +58,7 @@ describe("Lobby Code Input", () => {
         })
 
         it("Has a maximum input of 6 digits", async () => {
-            let lobbyCodeInput = getLobbyCodeInputElement()
+            const lobbyCodeInput = getLobbyCodeInputElement()
             await fireEvent.input(lobbyCodeInput, {
                 target: { value: "1234567890" },
             })
@@ -66,8 +66,8 @@ describe("Lobby Code Input", () => {
         })
 
         it("Will send a message upon receiving a valid 6 digit code", async () => {
-            let lobbyCodeInput = getLobbyCodeInputElement()
-            let dummyCode = "123456"
+            const lobbyCodeInput = getLobbyCodeInputElement()
+            const dummyCode = "123456"
             await fireEvent.input(lobbyCodeInput, {
                 target: { value: dummyCode },
             })
@@ -80,36 +80,36 @@ describe("Lobby Code Input", () => {
 
     describe("Lobby Status Helper Text", () => {
         it("Exists", () => {
-            let helperText = getLobbyCodeHelperText()
+            const helperText = getLobbyCodeHelperText()
             expect(helperText).toBeDefined()
         })
         it("Contains nothing to begin with", () => {
-            let helperText = getLobbyCodeHelperText()
+            const helperText = getLobbyCodeHelperText()
             expect(helperText).toHaveTextContent("")
         })
         it("Gives Error when Invalid Lobby", async () => {
-            let container = getFreshContainer()
+            const container = getFreshContainer()
             await MockMessageReceivedFromServer("LobbyNotFound")
-            let helperText = getByTitle(container, "helper text")
+            const helperText = getByTitle(container, "helper text")
             expect(helperText).toHaveTextContent("Lobby Not Found!")
         })
 
         it("Displays status when Valid Lobby", async () => {
-            let container = getFreshContainer()
-            let lobbyCode = "123456"
-            let lobbyCodeInput = getByLabelText(
+            const container = getFreshContainer()
+            const lobbyCode = "123456"
+            const lobbyCodeInput = getByLabelText(
                 container,
                 "Lobby Code"
             ) as HTMLInputElement
             await fireEvent.input(lobbyCodeInput, {
                 target: { value: lobbyCode },
             })
-            let status = "hello, world!"
+            const status = "hello, world!"
             await MockMessageReceivedFromServer("LobbyFound", {
                 lobby: lobbyCode,
                 status: status,
             })
-            let helperText = getByTitle(container, "helper text")
+            const helperText = getByTitle(container, "helper text")
             expect(helperText).toHaveTextContent(status)
         })
     })

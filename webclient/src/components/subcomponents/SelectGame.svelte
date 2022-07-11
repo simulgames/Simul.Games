@@ -1,10 +1,11 @@
 <script lang="ts">
     import Input from "../style/Input.svelte"
-    export let GameSelected: string = ""
+
+    export let GameSelected = ""
 </script>
 
 <Input
-    ID="selectgame"
+    ID="select-game"
     Label="Select Game"
     List="games"
     bind:Value={GameSelected}>

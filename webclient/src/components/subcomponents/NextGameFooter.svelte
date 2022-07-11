@@ -2,7 +2,7 @@
     import { scale } from "svelte/transition"
     import Button from "../style/Button.svelte"
     import { SendMessage } from "../../scripts/WebSocket.js"
-    export let isHost: boolean = false
+    export let isHost = false
 </script>
 
 <div

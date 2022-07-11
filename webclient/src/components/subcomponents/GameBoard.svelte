@@ -1,13 +1,13 @@
 <script lang="ts">
     import Tile from "../style/Tile.svelte"
-    export let Class: string = ""
+    export let Class = ""
     export let TileBoard: [
         {
             row: [{ letter: string; style: string }]
             rowStyle?: { class: string; delay: number }
         }
     ]
-    export let TileClass: string = ""
+    export let TileClass = ""
 </script>
 
 <div class="grid-column grid {Class}">
