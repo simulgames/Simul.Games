@@ -14,6 +14,6 @@ jobs:
           cd webclient
           npm ci
       - uses: reviewdog/action-eslint@v1
-          with:
-            fail_on_error: true
-            workdir: webclient   
+        with:
+          fail_on_error: true
+          workdir: 'webclient/'
