@@ -1,6 +1,6 @@
 name: Run Linters
 on:
-  pull_request:
+  pull_request_target:
     branches: [ "main" ]
 jobs:
   eslint:
@@ -10,10 +10,17 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'webclient/.nvmrc'
-      - run: |
+      - name: Fetch Webclient Dependencies
+        run: |
           cd webclient
           npm ci
-      - uses: reviewdog/action-eslint@v1
+      - name: Run ESLint
+        uses: reviewdog/action-eslint@v1
         with:
           fail_on_error: true
           workdir: 'webclient/'
+      - name: Run Prettier
+        uses: creyD/prettier_action@v4.2
+        with: 
+          dry: true
+          working_directory: 'webclient/'
