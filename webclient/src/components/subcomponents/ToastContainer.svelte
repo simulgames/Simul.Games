@@ -1,6 +1,7 @@
 <script lang="ts">
     import Toast from "../style/Toast.svelte"
     import { toasts } from "../../scripts/Toast"
+
     export let maxToasts = 10
 </script>
 

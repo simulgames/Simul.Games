@@ -1,6 +1,6 @@
 <script lang="ts">
     export let key = ""
-    export let icon: string = ""
+    export let icon = ""
     function pressKey() {
         let keyboardEvent = new KeyboardEvent("keydown", {
             key: key,

@@ -6,7 +6,7 @@ function createToasts() {
         writable({})
     function removeToast(id: string) {
         update((toast) => {
-            let newToast = { ...toast }
+            const newToast = { ...toast }
             delete newToast[id]
             return newToast
         })
@@ -14,10 +14,10 @@ function createToasts() {
 
     return {
         subscribe,
-        addToast: (text: string, duration: number = 2000) =>
+        addToast: (text: string, duration = 2000) =>
             update((toast) => {
-                let newToast = { ...toast }
-                let id = v4()
+                const newToast = { ...toast }
+                const id = v4()
                 newToast[id] = text
                 setTimeout(() => {
                     removeToast(id)

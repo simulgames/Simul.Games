@@ -1,6 +1,6 @@
 <script lang="ts">
-    export let disabled: Boolean = false
-    export let text: string = ""
+    export let disabled = false
+    export let text = ""
     export let icon: string | null = null
     export let OnClick: (event: InputEvent) => void | null = null
 </script>

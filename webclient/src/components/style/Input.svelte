@@ -1,7 +1,7 @@
 <script lang="ts">
-    export let ID: string = ""
-    export let Label: string = ""
-    export let Value: string = ""
+    export let ID = ""
+    export let Label = ""
+    export let Value = ""
     export let OnInput: (event: InputEvent) => void | null = null
     export let HelperText: string | null = null
     export let List: string | null = null

@@ -1,7 +1,6 @@
 <script lang="ts">
     import { type LobbyData } from "../types/LobbyData"
     import { onMount } from "svelte"
-    export let lobbyData: LobbyData = null
     import { SendMessage } from "../scripts/WebSocket"
     import Keyboard from "./subcomponents/Keyboard.svelte"
     import GameBoard from "./subcomponents/GameBoard.svelte"
@@ -11,7 +10,7 @@
     import NextGameFooter from "./subcomponents/NextGameFooter.svelte"
     import "./style/word-duel.css"
 
-    type result = any
+    export let lobbyData: LobbyData = null
     export type GameInfo = {
         Guesses: { id: [number[string]] }
         Results: { id: [number[number]] }
@@ -22,6 +21,7 @@
     }
 
     let gameInfo: GameInfo = null
+
     function setGameInfo(e: Event) {
         gameInfo = (e as CustomEvent).detail
         if (gameInfo.HasClientFinished) {
