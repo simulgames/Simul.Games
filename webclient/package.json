@@ -46,8 +46,7 @@
         "websocket-ts": "^1.1.1"
     },
     "type": "module",
-    "engines" : {
-        "node" : ">=16.9.0"
+    "engines": {
+        "node": ">=16.9.0"
     }
-
 }
