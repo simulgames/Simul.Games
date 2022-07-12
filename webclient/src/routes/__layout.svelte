@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { DarkMode } from "../scripts/DarkMode"
+    import { DarkMode } from "$lib/DarkMode"
     import { onMount } from "svelte"
     import "../app.css"
     onMount(() => {

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { SendMessage } from "../../scripts/WebSocket"
+    import { SendMessage } from "$lib/WebSocket"
     import { onMount } from "svelte"
     import Input from "../style/Input.svelte"
 

@@ -2,7 +2,7 @@
     import UsernameInput from "./subcomponents/UsernameInput.svelte"
     import SelectGame from "./subcomponents/SelectGame.svelte"
     import Button from "./style/Button.svelte"
-    import { SendMessage } from "../scripts/WebSocket"
+    import { SendMessage } from "$lib/WebSocket"
     export let Username = ""
     export let GameSelected = ""
 

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { type LobbyData } from "../types/LobbyData"
-    import { SendMessage } from "../scripts/WebSocket"
+    import { SendMessage } from "$lib/WebSocket"
     export let lobbyData: LobbyData
 
     import Card from "./style/Card.svelte"

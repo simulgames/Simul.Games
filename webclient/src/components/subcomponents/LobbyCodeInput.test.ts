@@ -7,11 +7,11 @@ import {
     getByTitle,
 } from "@testing-library/svelte"
 
-import "../../scripts/WebSocket"
+import "$lib/WebSocket"
 
 import LobbyCodeInput from "./LobbyCodeInput.svelte"
 import { MockMessageReceivedFromServer } from "../../setupTests"
-import * as WebSocket from "../../scripts/WebSocket"
+import * as WebSocket from "$lib/WebSocket"
 const SendMessageSpy = vi.spyOn(WebSocket, "SendMessage")
 
 function getFreshContainer(): HTMLElement {

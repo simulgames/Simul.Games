@@ -1,7 +1,7 @@
 <script lang="ts">
     import { scale } from "svelte/transition"
     import Button from "../style/Button.svelte"
-    import { SendMessage } from "../../scripts/WebSocket.js"
+    import { SendMessage } from "$lib/WebSocket"
     export let isHost = false
 </script>
 
