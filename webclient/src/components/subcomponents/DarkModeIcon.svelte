@@ -1,6 +1,6 @@
 <script lang="ts">
     import IconButton from "../style/IconButton.svelte"
-    import { DarkMode } from "../../scripts/DarkMode"
+    import { DarkMode } from "$lib/DarkMode"
 
     function ToggleDarkMode() {
         DarkMode.set(!$DarkMode)

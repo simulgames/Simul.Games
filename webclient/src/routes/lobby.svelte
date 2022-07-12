@@ -2,13 +2,13 @@
     import Header from "../components/Header.svelte"
     import Footer from "../components/Footer.svelte"
     import WaitingLobby from "../components/WaitingLobby.svelte"
-    import { SendMessage } from "../scripts/WebSocket"
+    import { SendMessage } from "$lib/WebSocket"
     import { onMount } from "svelte"
     import { goto } from "$app/navigation"
     import { type LobbyData } from "../types/LobbyData"
     import GameLobby from "../components/GameLobby.svelte"
     import IconButton from "../components/style/IconButton.svelte"
-    import { replaceStateWithQuery } from "../scripts/ReplaceStateWithQuery"
+    import { replaceStateWithQuery } from "$lib/ReplaceStateWithQuery"
     function goToHomePage() {
         goto("/")
     }

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { SendMessage } from "../scripts/WebSocket"
+    import { SendMessage } from "$lib/WebSocket"
 
     import LobbyCodeInput from "./subcomponents/LobbyCodeInput.svelte"
     import UsernameInput from "./subcomponents/UsernameInput.svelte"

@@ -1,12 +1,12 @@
 <script lang="ts">
     import { type LobbyData } from "../types/LobbyData"
     import { onMount } from "svelte"
-    import { SendMessage } from "../scripts/WebSocket"
+    import { SendMessage } from "$lib/WebSocket"
     import Keyboard from "./subcomponents/Keyboard.svelte"
     import GameBoard from "./subcomponents/GameBoard.svelte"
     import Paper from "./style/Paper.svelte"
     import ToastContainer from "./subcomponents/ToastContainer.svelte"
-    import { toasts } from "../scripts/Toast"
+    import { toasts } from "$lib/Toast"
     import NextGameFooter from "./subcomponents/NextGameFooter.svelte"
     import "./style/word-duel.css"
 
