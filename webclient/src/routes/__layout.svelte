@@ -41,6 +41,4 @@
     </script>
 </svelte:head>
 
-<div
-    class="absolute top-0 -z-10 h-full w-full bg-primary-100 dark:bg-zinc-900" />
 <slot />
