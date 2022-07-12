@@ -20,6 +20,6 @@ jobs:
           fail_on_error: true
           workdir: 'webclient/'
       - name: Run Prettier
-        run: |
-          cd webclient
-          prettier . --check
+        uses: EPMatt/reviewdog-action-prettier@v1
+        with:
+          workdir: 'webclient/'
